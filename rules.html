@@ -7,40 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Плавающая кнопка чата -->
-    <button class="floating-chat-btn" id="chatBtn" aria-label="Открыть чат">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        </svg>
-    </button>
-
-    <!-- Всплывающее окно чата -->
-    <div class="chat-popup" id="chatPopup">
-        <div class="chat-popup-header">
-            <h3>💬 Чат поддержки</h3>
-            <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="chat-message bot-message">
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">
-                    <p>Здравствуйте! Чем могу помочь?</p>
-                    <span class="message-time">Сейчас</span>
-                </div>
-            </div>
-        </div>
-        <div class="chat-input-container">
-            <form id="chatForm">
-                <input type="text" id="chatInput" placeholder="Напишите сообщение..." required>
-                <button type="submit" class="chat-send-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </div>
-
     <header>
         <div class="container">
             <h1>🎮 Verdant Elegy</h1>
@@ -224,6 +190,20 @@
             <p>© 2026 Verdant Elegy. Все права защищены.</p>
         </div>
     </footer>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/69a854abeb951d1c3453e0a8/1jisolg4s';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 
     <script src="script.js"></script>
 </body>
