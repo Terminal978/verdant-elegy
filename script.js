@@ -1,3 +1,114 @@
+// Minecraft частицы
+class MinecraftParticles {
+    constructor() {
+        this.canvas = document.createElement('canvas');
+        this.canvas.id = 'particles-canvas';
+        document.body.insertBefore(this.canvas, document.body.firstChild);
+        
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.particleCount = 30;
+        
+        this.resize();
+        this.init();
+        this.animate();
+        
+        window.addEventListener('resize', () => this.resize());
+    }
+    
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+    
+    init() {
+        // Создаем частицы в стиле Minecraft (кубики)
+        for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 15 + 5,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: Math.random() * 0.5 + 0.2,
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 2,
+                opacity: Math.random() * 0.3 + 0.1,
+                color: this.getRandomColor()
+            });
+        }
+    }
+    
+    getRandomColor() {
+        const colors = [
+            'rgba(102, 126, 234, ',  // Фиолетовый
+            'rgba(118, 75, 162, ',   // Темно-фиолетовый
+            'rgba(255, 255, 255, ',  // Белый
+            'rgba(139, 69, 19, ',    // Коричневый (земля)
+            'rgba(34, 139, 34, ',    // Зеленый (трава)
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    drawCube(particle) {
+        this.ctx.save();
+        this.ctx.translate(particle.x, particle.y);
+        this.ctx.rotate(particle.rotation * Math.PI / 180);
+        
+        // Рисуем пиксельный куб
+        const size = particle.size;
+        
+        // Верхняя грань
+        this.ctx.fillStyle = particle.color + (particle.opacity + 0.1) + ')';
+        this.ctx.fillRect(-size/2, -size/2, size, size/3);
+        
+        // Левая грань
+        this.ctx.fillStyle = particle.color + (particle.opacity - 0.05) + ')';
+        this.ctx.fillRect(-size/2, -size/6, size/3, size);
+        
+        // Правая грань
+        this.ctx.fillStyle = particle.color + particle.opacity + ')';
+        this.ctx.fillRect(-size/6, -size/6, size/3, size);
+        
+        this.ctx.restore();
+    }
+    
+    update() {
+        this.particles.forEach(particle => {
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+            particle.rotation += particle.rotationSpeed;
+            
+            // Возвращаем частицы, вышедшие за границы
+            if (particle.y > this.canvas.height + particle.size) {
+                particle.y = -particle.size;
+                particle.x = Math.random() * this.canvas.width;
+            }
+            if (particle.x > this.canvas.width + particle.size) {
+                particle.x = -particle.size;
+            }
+            if (particle.x < -particle.size) {
+                particle.x = this.canvas.width + particle.size;
+            }
+        });
+    }
+    
+    draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.particles.forEach(particle => this.drawCube(particle));
+    }
+    
+    animate() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Инициализируем частицы после загрузки страницы
+window.addEventListener('load', () => {
+    new MinecraftParticles();
+});
+
 // Переключатель темы
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
@@ -111,6 +222,140 @@ if (document.getElementById('serverStatus')) {
     checkServerStatus();
     // Обновляем статус каждые 30 секунд
     setInterval(checkServerStatus, 30000);
+}
+
+// Плавающая кнопка чата
+const chatBtn = document.getElementById('chatBtn');
+const chatPopup = document.getElementById('chatPopup');
+const chatCloseBtn = document.getElementById('chatCloseBtn');
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+
+// WebSocket connection
+let ws = null;
+let reconnectInterval = null;
+
+// WebSocket URL - замените на адрес вашего сервера
+const WS_URL = 'ws://localhost:3000'; // Для локальной разработки
+// const WS_URL = 'wss://your-server.com'; // Для продакшена
+
+function connectWebSocket() {
+    ws = new WebSocket(WS_URL);
+    
+    ws.onopen = () => {
+        console.log('Connected to chat server');
+        if (reconnectInterval) {
+            clearInterval(reconnectInterval);
+            reconnectInterval = null;
+        }
+    };
+    
+    ws.onmessage = (event) => {
+        try {
+            const data = JSON.parse(event.data);
+            
+            if (data.type === 'admin_message') {
+                addMessage(data.text, 'bot');
+            } else if (data.type === 'system') {
+                console.log('System:', data.message);
+            }
+        } catch (error) {
+            console.error('Error parsing message:', error);
+        }
+    };
+    
+    ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+    
+    ws.onclose = () => {
+        console.log('Disconnected from chat server');
+        // Try to reconnect every 5 seconds
+        if (!reconnectInterval) {
+            reconnectInterval = setInterval(() => {
+                console.log('Attempting to reconnect...');
+                connectWebSocket();
+            }, 5000);
+        }
+    };
+}
+
+// Connect on page load
+connectWebSocket();
+
+if (chatBtn && chatPopup) {
+    chatBtn.addEventListener('click', function() {
+        chatPopup.classList.toggle('active');
+        if (chatPopup.classList.contains('active')) {
+            chatInput.focus();
+        }
+    });
+    
+    if (chatCloseBtn) {
+        chatCloseBtn.addEventListener('click', function() {
+            chatPopup.classList.remove('active');
+        });
+    }
+    
+    // Закрытие при клике вне окна
+    document.addEventListener('click', function(e) {
+        if (!chatPopup.contains(e.target) && !chatBtn.contains(e.target)) {
+            chatPopup.classList.remove('active');
+        }
+    });
+}
+
+// Обработка отправки сообщения
+if (chatForm) {
+    chatForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        if (!message) return;
+        
+        // Добавляем сообщение пользователя в чат
+        addMessage(message, 'user');
+        chatInput.value = '';
+        
+        // Отправляем через WebSocket
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({
+                type: 'user_message',
+                text: message,
+                timestamp: new Date().toISOString()
+            }));
+        } else {
+            addMessage('Ошибка подключения. Попробуйте позже.', 'bot');
+        }
+    });
+}
+
+function addMessage(text, type) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${type}-message`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.textContent = type === 'user' ? '👤' : '🤖';
+    
+    const content = document.createElement('div');
+    content.className = 'message-content';
+    
+    const p = document.createElement('p');
+    p.textContent = text;
+    
+    const time = document.createElement('span');
+    time.className = 'message-time';
+    time.textContent = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    
+    content.appendChild(p);
+    content.appendChild(time);
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(content);
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 // Плавная прокрутка к секциям (для якорей на той же странице)
