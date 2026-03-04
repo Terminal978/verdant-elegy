@@ -1,0 +1,663 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background 0.3s ease;
+}
+
+body.dark-theme header {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 20px;
+    width: 50px;
+    height: 26px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    padding: 0;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+body.dark-theme .theme-toggle-slider {
+    transform: translateX(24px);
+}
+
+.theme-toggle-slider::before {
+    content: '☀️';
+}
+
+body.dark-theme .theme-toggle-slider::before {
+    content: '🌙';
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+header h1 {
+    color: white;
+    font-size: 24px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+main {
+    padding: 40px 20px;
+}
+
+section {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme section {
+    background: #0f3460;
+    color: #e0e0e0;
+}
+
+.hero {
+    text-align: center;
+}
+
+.hero h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.server-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+body.dark-theme .server-info {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.server-info p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.ip {
+    background: #667eea;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    user-select: none;
+    position: relative;
+}
+
+.ip:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+}
+
+.ip:active {
+    transform: scale(0.98);
+}
+
+.ip::after {
+    content: '📋';
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.ip.copied::after {
+    content: '✓';
+    color: #4ade80;
+}
+
+.status-online {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.status-online::before {
+    content: '🟢 ';
+}
+
+.status-offline {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.status-offline::before {
+    content: '🔴 ';
+}
+
+.status-loading {
+    color: #fbbf24;
+    font-weight: bold;
+}
+
+.status-loading::before {
+    content: '🟡 ';
+}
+
+#onlineInfo {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.support-section h2,
+.donate-section h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.support-form {
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.support-form h3 {
+    margin-bottom: 20px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+body.dark-theme .support-form h3 {
+    color: #b0b0b0;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+    background: white;
+    color: #333;
+}
+
+body.dark-theme form input,
+body.dark-theme form select,
+body.dark-theme form textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-theme form input::placeholder,
+body.dark-theme form textarea::placeholder {
+    color: #999;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+form button {
+    width: 100%;
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #5568d3;
+}
+
+.faq-section h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.faq {
+    margin-top: 0;
+}
+
+.faq h3 {
+    margin-bottom: 20px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+body.dark-theme .faq h3 {
+    color: #b0b0b0;
+}
+
+.faq-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: background 0.3s ease;
+}
+
+body.dark-theme .faq-item {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.faq-item h4 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.donate-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.donate-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.donate-card:hover {
+    transform: translateY(-5px);
+}
+
+.donate-card.featured {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: scale(1.05);
+}
+
+.donate-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #667eea;
+}
+
+.featured .price {
+    color: white;
+}
+
+.donate-card ul {
+    list-style: none;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.donate-card li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.donate-card li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.featured li:before {
+    color: white;
+}
+
+.donate-btn {
+    padding: 12px 30px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.donate-btn:hover {
+    background: #5568d3;
+}
+
+.featured .donate-btn {
+    background: white;
+    color: #667eea;
+}
+
+.featured .donate-btn:hover {
+    background: #f0f0f0;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    transition: background 0.3s ease;
+}
+
+body.dark-theme footer {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    header .container > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .theme-toggle {
+        margin: 0;
+    }
+    
+    header h1 {
+        font-size: 20px;
+    }
+    
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    nav a {
+        margin: 0;
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+    }
+    
+    section {
+        padding: 25px 20px;
+    }
+    
+    .hero h2 {
+        font-size: 24px;
+    }
+    
+    .server-info {
+        padding: 15px;
+        width: 100%;
+    }
+    
+    .server-info p {
+        font-size: 16px;
+    }
+    
+    .ip {
+        display: inline-block;
+        word-break: break-all;
+        font-size: 14px;
+    }
+    
+    .support-form {
+        padding: 0;
+    }
+    
+    .support-section h2,
+    .faq-section h2 {
+        font-size: 24px;
+    }
+    
+    form input,
+    form select,
+    form textarea {
+        font-size: 16px;
+        padding: 14px;
+    }
+    
+    form button {
+        padding: 16px;
+        font-size: 16px;
+    }
+    
+    .faq-item {
+        padding: 15px;
+    }
+    
+    .faq-item h4 {
+        font-size: 16px;
+    }
+    
+    .donate-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .donate-card.featured {
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 900px;
+    }
+    
+    header h1 {
+        font-size: 22px;
+    }
+    
+    nav a {
+        margin-left: 20px;
+        font-size: 15px;
+    }
+    
+    .hero h2 {
+        font-size: 28px;
+    }
+    
+    .server-info p {
+        font-size: 17px;
+    }
+    
+    section {
+        padding: 35px;
+    }
+    
+    .donate-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .donate-card.featured {
+        grid-column: span 2;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    header {
+        padding: 15px 0;
+    }
+    
+    header h1 {
+        font-size: 18px;
+    }
+    
+    nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    main {
+        padding: 20px 10px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .hero h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .server-info {
+        padding: 12px;
+    }
+    
+    .server-info p {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+    
+    .ip {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+    
+    .support-section h2,
+    .faq-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .support-form h3,
+    .faq h3 {
+        font-size: 18px;
+    }
+    
+    .faq-item h4 {
+        font-size: 15px;
+    }
+    
+    .faq-item p {
+        font-size: 14px;
+    }
+    
+    footer {
+        font-size: 13px;
+        padding: 15px 0;
+    }
+}

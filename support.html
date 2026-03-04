@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdant Elegy - Поддержка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 Verdant Elegy</h1>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <nav>
+                    <a href="index.html">Главная</a>
+                    <a href="support.html">Поддержка</a>
+                    <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                    <span class="theme-toggle-slider"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="support" class="support-section">
+            <h2>Центр поддержки</h2>
+            <div class="support-form">
+                <h3>Отправить запрос</h3>
+                <form id="supportForm">
+                    <input type="text" id="username" placeholder="Ваш ник в игре" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <select id="category" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="bug">Баг/Ошибка</option>
+                        <option value="grief">Жалоба на игрока</option>
+                        <option value="question">Вопрос</option>
+                        <option value="other">Другое</option>
+                    </select>
+                    <textarea id="message" placeholder="Опишите вашу проблему" rows="5" required></textarea>
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Verdant Elegy. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
