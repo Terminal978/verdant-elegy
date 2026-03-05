@@ -2680,3 +2680,72 @@ body.dark-theme .application-text {
         flex: 1;
     }
 }
+
+
+/* Кнопка отправки кода */
+.send-code-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+
+.send-code-btn:hover {
+    background: #2980b9;
+}
+
+/* Контейнер для пароля с кнопкой показа */
+.password-container {
+    display: flex !important;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 15px;
+    align-items: stretch;
+}
+
+.password-container input {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
+    width: 100%;
+    min-width: 0;
+}
+
+.toggle-password {
+    background: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    border-radius: 8px;
+    flex-shrink: 0;
+    width: 40px !important;
+    min-width: 40px;
+    max-width: 40px;
+}
+
+.toggle-password:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.eye-icon {
+    user-select: none;
+    display: block;
+}
+
+
+/* Принудительное скрытие контейнеров паролей до подтверждения */
+#password-container-1[style*="display: none"],
+#password-container-2[style*="display: none"] {
+    display: none !important;
+}
