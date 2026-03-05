@@ -66,6 +66,8 @@ async function sendToDiscord(app) {
     const webhookURL = 'https://discord.com/api/webhooks/1479051147984634018/hgJWOlti7YxGbXvHwg9-p0vg4HA64ir1txqg84BUUL97zG1fjZOUjxNghkmkoLiKZS5c';
     
     const embed = {
+        username: 'Verdant Elegy',
+        avatar_url: 'https://i.imgur.com/AfFp7pu.png', // Замените на URL вашей аватарки
         embeds: [{
             title: '⚡ Новая заявка на администратора',
             color: 15844367, // Золотой цвет
