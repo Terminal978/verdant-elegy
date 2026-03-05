@@ -383,6 +383,20 @@ if (supportForm) {
         const category = document.getElementById('category').value;
         const message = document.getElementById('message').value;
         
+        // Сохраняем запрос в localStorage
+        const requests = JSON.parse(localStorage.getItem('supportRequests') || '[]');
+        const newRequest = {
+            id: Date.now().toString(),
+            username: username,
+            email: email,
+            category: category,
+            message: message,
+            timestamp: new Date().toISOString(),
+            status: 'new'
+        };
+        requests.push(newRequest);
+        localStorage.setItem('supportRequests', JSON.stringify(requests));
+        
         // Discord Webhook URL - замените на ваш webhook
         const webhookURL = 'https://discord.com/api/webhooks/1478731364726607993/9GU0koyRtbyYqYB3muEgW3hO0ugfsROZRjSJmxnxR0CBPKmhEyQwAJ445_XVsXBiwZ1c';
         
@@ -471,3 +485,45 @@ document.querySelectorAll('section').forEach(section => {
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
 });
+
+
+// Проверка авторизации и отображение пользователя
+function checkAuth() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const loginLink = document.querySelector('a[href="login.html"]');
+    
+    if (currentUser && loginLink) {
+        // Создаем меню пользователя
+        const userMenu = document.createElement('div');
+        userMenu.className = 'user-menu-auth';
+        userMenu.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-left: auto;';
+        
+        userMenu.innerHTML = `
+            <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; color: white; white-space: nowrap;">
+                👤 ${currentUser.username}
+            </span>
+            ${currentUser.role === 'admin' ? '<a href="admin.html" style="background: rgba(255,215,0,0.3); padding: 8px 16px; border-radius: 5px; text-decoration: none; color: white; white-space: nowrap;">⚙️ Админ</a>' : ''}
+            <button id="logout-btn-nav" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; border: none; color: white; cursor: pointer; white-space: nowrap;">Выйти</button>
+        `;
+        
+        // Удаляем кнопку входа
+        loginLink.remove();
+        
+        // Добавляем меню пользователя в конец контейнера header
+        const headerContainer = document.querySelector('header .container > div');
+        if (headerContainer) {
+            headerContainer.appendChild(userMenu);
+        }
+        
+        // Обработчик выхода
+        document.getElementById('logout-btn-nav').addEventListener('click', () => {
+            if (confirm('Выйти из аккаунта?')) {
+                localStorage.removeItem('currentUser');
+                window.location.reload();
+            }
+        });
+    }
+}
+
+// Проверяем авторизацию при загрузке страницы
+document.addEventListener('DOMContentLoaded', checkAuth);

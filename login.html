@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdant Elegy - Вход</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 Verdant Elegy</h1>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <nav>
+                    <a href="index.html">Главная</a>
+                    <a href="rules.html">Правила</a>
+                    <a href="support.html">Поддержка</a>
+                    <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                    <span class="theme-toggle-slider"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Вход</button>
+                    <button class="auth-tab" data-tab="register">Регистрация</button>
+                </div>
+
+                <!-- Форма входа -->
+                <div id="login-form" class="auth-form active">
+                    <h2>Вход в аккаунт</h2>
+                    <form id="loginForm">
+                        <input type="text" id="login-username" placeholder="Имя пользователя" required>
+                        <input type="password" id="login-password" placeholder="Пароль" required>
+                        <button type="submit">Войти</button>
+                    </form>
+                    <p class="auth-message" id="login-message"></p>
+                </div>
+
+                <!-- Форма регистрации -->
+                <div id="register-form" class="auth-form">
+                    <h2>Регистрация</h2>
+                    <form id="registerForm">
+                        <input type="text" id="register-username" placeholder="Имя пользователя" required minlength="3">
+                        <input type="email" id="register-email" placeholder="Email" required>
+                        <input type="text" id="register-minecraft" placeholder="Ник в Minecraft" required>
+                        <input type="password" id="register-password" placeholder="Пароль" required minlength="6">
+                        <input type="password" id="register-confirm" placeholder="Подтвердите пароль" required>
+                        <button type="submit">Зарегистрироваться</button>
+                    </form>
+                    <p class="auth-message" id="register-message"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Verdant Elegy. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
