@@ -490,38 +490,59 @@ document.querySelectorAll('section').forEach(section => {
 // Проверка авторизации и отображение пользователя
 function checkAuth() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const loginLink = document.querySelector('a[href="login.html"]');
+    const loginLink = document.getElementById('login-link');
+    const userMenuContainer = document.getElementById('user-menu-container');
+    const usernameDisplay = document.getElementById('username-display');
+    const adminMenuLink = document.getElementById('admin-menu-link');
+    const logoutBtn = document.getElementById('logout-btn');
     
-    if (currentUser && loginLink) {
-        // Создаем меню пользователя
-        const userMenu = document.createElement('div');
-        userMenu.className = 'user-menu-auth';
-        userMenu.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-left: auto;';
+    console.log('checkAuth called', { currentUser, loginLink, userMenuContainer });
+    
+    if (currentUser && loginLink && userMenuContainer) {
+        // Скрываем кнопку входа
+        loginLink.style.display = 'none';
         
-        userMenu.innerHTML = `
-            <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; color: white; white-space: nowrap;">
-                👤 ${currentUser.username}
-            </span>
-            ${currentUser.role === 'admin' ? '<a href="admin.html" style="background: rgba(255,215,0,0.3); padding: 8px 16px; border-radius: 5px; text-decoration: none; color: white; white-space: nowrap;">⚙️ Админ</a>' : ''}
-            <button id="logout-btn-nav" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; border: none; color: white; cursor: pointer; white-space: nowrap;">Выйти</button>
-        `;
+        // Показываем меню пользователя
+        userMenuContainer.style.display = 'flex';
+        usernameDisplay.textContent = `👤 ${currentUser.username}`;
         
-        // Удаляем кнопку входа
-        loginLink.remove();
+        // Показываем админ панель только для админов
+        if (currentUser.role === 'admin' && adminMenuLink) {
+            adminMenuLink.style.display = 'block';
+        }
         
-        // Добавляем меню пользователя в конец контейнера header
-        const headerContainer = document.querySelector('header .container > div');
-        if (headerContainer) {
-            headerContainer.appendChild(userMenu);
+        // Выпадающее меню
+        const userMenuToggle = document.getElementById('user-menu-toggle');
+        const userMenuContent = document.getElementById('user-menu-content');
+        
+        console.log('Menu elements', { userMenuToggle, userMenuContent });
+        
+        if (userMenuToggle && userMenuContent) {
+            userMenuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log('Toggle clicked');
+                userMenuContent.classList.toggle('show');
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', () => {
+                userMenuContent.classList.remove('show');
+            });
+            
+            userMenuContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
         }
         
         // Обработчик выхода
-        document.getElementById('logout-btn-nav').addEventListener('click', () => {
-            if (confirm('Выйти из аккаунта?')) {
-                localStorage.removeItem('currentUser');
-                window.location.reload();
-            }
-        });
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Выйти из аккаунта?')) {
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                }
+            });
+        }
     }
 }
 

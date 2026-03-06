@@ -9,6 +9,26 @@ if (!currentUser || currentUser.role !== 'admin') {
 // Отображаем имя пользователя
 document.getElementById('username-display').textContent = `👤 ${currentUser.username}`;
 
+// Выпадающее меню пользователя
+const userMenuToggle = document.getElementById('user-menu-toggle');
+const userMenuContent = document.getElementById('user-menu-content');
+
+if (userMenuToggle && userMenuContent) {
+    userMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userMenuContent.classList.toggle('show');
+    });
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', () => {
+        userMenuContent.classList.remove('show');
+    });
+
+    userMenuContent.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
+
 // Выход
 document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('currentUser');

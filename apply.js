@@ -1,4 +1,61 @@
 
+// Проверка авторизации и отображение меню пользователя
+function checkAuth() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const loginLink = document.getElementById('login-link');
+    const userMenuContainer = document.getElementById('user-menu-container');
+    const usernameDisplay = document.getElementById('username-display');
+    const adminMenuLink = document.getElementById('admin-menu-link');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    if (currentUser && loginLink && userMenuContainer) {
+        // Скрываем кнопку входа
+        loginLink.style.display = 'none';
+        
+        // Показываем меню пользователя
+        userMenuContainer.style.display = 'flex';
+        usernameDisplay.textContent = `👤 ${currentUser.username}`;
+        
+        // Показываем админ панель только для админов
+        if (currentUser.role === 'admin' && adminMenuLink) {
+            adminMenuLink.style.display = 'block';
+        }
+        
+        // Выпадающее меню
+        const userMenuToggle = document.getElementById('user-menu-toggle');
+        const userMenuContent = document.getElementById('user-menu-content');
+        
+        if (userMenuToggle && userMenuContent) {
+            userMenuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userMenuContent.classList.toggle('show');
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', () => {
+                userMenuContent.classList.remove('show');
+            });
+            
+            userMenuContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+        
+        // Обработчик выхода
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Выйти из аккаунта?')) {
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                }
+            });
+        }
+    }
+}
+
+// Проверяем авторизацию при загрузке
+checkAuth();
+
 // Проверяем статус набора
 function checkApplicationStatus() {
     const status = localStorage.getItem('applicationsOpen') !== 'false';

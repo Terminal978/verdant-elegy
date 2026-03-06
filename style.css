@@ -69,8 +69,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 
 .theme-toggle {
@@ -142,12 +141,18 @@ body.dark-theme .theme-toggle-slider::before {
 header h1 {
     color: white;
     font-size: 24px;
+    white-space: nowrap;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin-left: 30px;
     transition: opacity 0.3s;
     white-space: nowrap;
 }
@@ -1753,7 +1758,83 @@ body.dark-theme .chat-divider::after {
     display: flex;
     align-items: center;
     gap: 15px;
-    color: var(--text-color);
+    color: white;
+    position: relative;
+}
+
+.user-menu-dropdown {
+    position: relative;
+}
+
+.user-menu-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.user-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.user-menu-content {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.user-menu-content.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    display: flex !important;
+}
+
+.user-menu-content a,
+.user-menu-content button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s;
+    font-size: 14px;
+    width: 100%;
+}
+
+.user-menu-content a:hover,
+.user-menu-content button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-menu-content .admin-link {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.user-menu-content .admin-link:hover {
+    background: rgba(255, 215, 0, 0.3);
 }
 
 .logout-btn {
@@ -1915,6 +1996,7 @@ body.dark-theme {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+    padding: 0 20px;
     gap: 20px;
     flex-wrap: wrap;
 }
