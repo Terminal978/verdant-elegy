@@ -504,10 +504,16 @@ function checkAuth() {
         
         // Показываем меню пользователя
         userMenuContainer.style.display = 'flex';
-        usernameDisplay.textContent = `👤 ${currentUser.username}`;
         
-        // Показываем админ панель только для админов
-        if (currentUser.role === 'admin' && adminMenuLink) {
+        // Отображаем роль пользователя
+        let roleIcon = '👤';
+        if (currentUser.role === 'owner') roleIcon = '👑';
+        else if (currentUser.role === 'admin') roleIcon = '⚙️';
+        
+        usernameDisplay.textContent = `${roleIcon} ${currentUser.username}`;
+        
+        // Показываем админ панель для админов и создателей
+        if ((currentUser.role === 'admin' || currentUser.role === 'owner') && adminMenuLink) {
             adminMenuLink.style.display = 'block';
         }
         

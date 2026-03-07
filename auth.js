@@ -225,17 +225,17 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
     }
 });
 
-// Создаем админа по умолчанию при первом запуске
+// Создаем создателя по умолчанию при первом запуске
 if (!localStorage.getItem('users')) {
-    const defaultAdmin = {
+    const defaultOwner = {
         username: 'admin',
         email: 'admin@verdantelegy.com',
         minecraft: 'Admin',
         password: 'admin123',
-        role: 'admin',
+        role: 'owner',
         createdAt: new Date().toISOString()
     };
-    localStorage.setItem('users', JSON.stringify([defaultAdmin]));
+    localStorage.setItem('users', JSON.stringify([defaultOwner]));
 }
 
 

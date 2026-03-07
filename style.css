@@ -731,38 +731,73 @@ body.dark-theme footer {
 
 @media (max-width: 768px) {
     header .container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    header .container > div {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    .theme-toggle {
-        margin: 0;
-    }
-    
-    header h1 {
-        font-size: 20px;
-    }
-    
-    nav {
-        display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         gap: 10px;
     }
     
+    header h1 {
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
     nav a {
-        margin: 0;
-        padding: 8px 15px;
+        font-size: 13px;
+        padding: 6px 12px;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 5px;
+    }
+    
+    .user-menu {
+        order: 3;
+    }
+    
+    #login-link {
+        order: 3;
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+    
+    .theme-toggle {
+        order: 4;
+        width: 60px !important;
+        height: 32px !important;
+        border-radius: 25px !important;
+    }
+    
+    .theme-toggle-slider {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 14px !important;
+        top: 3px !important;
+        left: 3px !important;
+    }
+    
+    body.dark-theme .theme-toggle-slider {
+        transform: translateX(28px) !important;
+    }
+    
+    .user-menu-toggle {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+    
+    .user-menu-content {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        min-width: 180px;
+    }
+    
+    .user-menu-content.show {
+        transform: translateX(-50%) translateY(0);
     }
     
     section {
@@ -824,6 +859,28 @@ body.dark-theme footer {
     .donate-card.featured {
         transform: scale(1);
     }
+    
+    .rule-item {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .rule-number {
+        font-size: 20px;
+    }
+    
+    .discord-support {
+        padding: 30px 20px;
+    }
+    
+    .discord-support h3 {
+        font-size: 22px;
+    }
+    
+    .discord-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -836,8 +893,22 @@ body.dark-theme footer {
     }
     
     nav a {
-        margin-left: 20px;
         font-size: 15px;
+    }
+    
+    .theme-toggle {
+        width: 55px;
+        height: 30px;
+    }
+    
+    .theme-toggle-slider {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+    }
+    
+    body.dark-theme .theme-toggle-slider {
+        transform: translateX(25px);
     }
     
     .hero h2 {
@@ -861,6 +932,30 @@ body.dark-theme footer {
         max-width: 400px;
         margin: 0 auto;
     }
+    
+    .admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .admin-card.full-width {
+        grid-column: 1 / -1;
+    }
+    
+    .users-table {
+        font-size: 14px;
+    }
+    
+    .application-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .requests-stats {
+        flex-wrap: nowrap;
+    }
+    
+    .applications-stats {
+        flex-wrap: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -869,16 +964,40 @@ body.dark-theme footer {
     }
     
     header {
-        padding: 15px 0;
+        padding: 12px 0;
     }
     
     header h1 {
-        font-size: 18px;
+        font-size: 16px;
     }
     
     nav a {
-        font-size: 14px;
-        padding: 6px 12px;
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    #login-link,
+    .user-menu-toggle {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .theme-toggle {
+        width: 70px !important;
+        height: 36px !important;
+        border-radius: 30px !important;
+    }
+    
+    .theme-toggle-slider {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 16px !important;
+        top: 3px !important;
+        left: 3px !important;
+    }
+    
+    body.dark-theme .theme-toggle-slider {
+        transform: translateX(34px) !important;
     }
     
     main {
@@ -910,7 +1029,8 @@ body.dark-theme footer {
     }
     
     .support-section h2,
-    .faq-section h2 {
+    .faq-section h2,
+    .rules-section h2 {
         font-size: 20px;
         margin-bottom: 20px;
     }
@@ -928,9 +1048,61 @@ body.dark-theme footer {
         font-size: 14px;
     }
     
+    .discord-support {
+        padding: 25px 15px;
+    }
+    
+    .discord-icon {
+        font-size: 48px;
+    }
+    
+    .discord-support h3 {
+        font-size: 20px;
+    }
+    
+    .discord-support p {
+        font-size: 14px;
+    }
+    
+    .discord-btn {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+    
+    .rule-category h3 {
+        font-size: 20px;
+    }
+    
+    .rule-item {
+        padding: 12px;
+    }
+    
+    .rule-number {
+        font-size: 18px;
+    }
+    
+    .rule-content h4 {
+        font-size: 16px;
+    }
+    
+    .rule-content p {
+        font-size: 14px;
+    }
+    
     footer {
         font-size: 13px;
         padding: 15px 0;
+    }
+    
+    .user-menu-content {
+        min-width: 160px;
+        padding: 8px;
+    }
+    
+    .user-menu-content a,
+    .user-menu-content button {
+        padding: 8px 12px;
+        font-size: 13px;
     }
 }
 
@@ -1854,17 +2026,82 @@ body.dark-theme .chat-divider::after {
 
 /* Адаптивность для админ-панели */
 @media (max-width: 768px) {
-    .admin-grid {
-        grid-template-columns: 1fr;
+    .admin-section h2 {
+        font-size: 22px;
+        margin-bottom: 25px;
     }
     
+    .admin-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .admin-card {
+        padding: 20px;
+    }
+    
+    .admin-card h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    /* Статистика */
+    .stat-item {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+    
+    .stat-item span {
+        font-size: 14px;
+    }
+    
+    .stat-item strong {
+        font-size: 18px;
+    }
+    
+    /* Таблица пользователей */
     .users-table {
         font-size: 12px;
+        overflow-x: auto;
+        display: block;
+    }
+    
+    .users-table table {
+        min-width: 600px;
     }
     
     .users-table th,
     .users-table td {
-        padding: 8px;
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+    
+    .users-table th {
+        font-size: 11px;
+    }
+    
+    .role-select {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+    
+    .delete-user-btn {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    /* Информация о сервере */
+    .server-info-admin p {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+    
+    /* Быстрые действия */
+    .admin-action-btn {
+        font-size: 13px;
+        padding: 10px;
+        margin-bottom: 8px;
     }
 }
 
@@ -1966,8 +2203,43 @@ body.dark-theme {
 
 @media (max-width: 768px) {
     .auth-container {
-        padding: 25px;
+        padding: 25px 20px;
         margin: 0 15px;
+    }
+    
+    .auth-tab {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .auth-form h2 {
+        font-size: 22px;
+    }
+    
+    .auth-form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .auth-form button {
+        font-size: 15px;
+        padding: 12px;
+    }
+    
+    .password-container input {
+        font-size: 14px;
+    }
+    
+    .toggle-password {
+        width: 36px;
+        min-width: 36px;
+        max-width: 36px;
+        font-size: 14px;
+    }
+    
+    .send-code-btn {
+        font-size: 14px;
+        padding: 10px;
     }
     
     .admin-grid {
@@ -2258,29 +2530,61 @@ body.dark-theme .request-message {
     .requests-controls {
         flex-direction: column;
         align-items: stretch;
+        padding: 15px;
     }
     
     .requests-stats {
         justify-content: space-between;
+        width: 100%;
     }
     
     .stat-badge {
         flex: 1;
         min-width: 100px;
+        padding: 10px 12px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
     }
     
     .requests-actions {
         justify-content: stretch;
+        width: 100%;
     }
     
     .filter-btn,
     .clear-all-btn {
         flex: 1;
+        font-size: 12px;
+        padding: 8px 12px;
     }
     
     .request-header {
         flex-direction: column;
         align-items: flex-start;
+    }
+    
+    .request-info {
+        width: 100%;
+    }
+    
+    .request-category,
+    .request-date,
+    .request-status-badge {
+        font-size: 12px;
+    }
+    
+    .request-field strong {
+        font-size: 13px;
+    }
+    
+    .request-field p {
+        font-size: 14px;
     }
     
     .request-actions {
@@ -2291,6 +2595,8 @@ body.dark-theme .request-message {
     .mark-new-btn,
     .delete-request-btn {
         flex: 1;
+        font-size: 12px;
+        padding: 8px 12px;
     }
 }
 
@@ -2726,20 +3032,33 @@ body.dark-theme .application-text {
     
     .applications-stats {
         justify-content: space-between;
+        width: 100%;
     }
     
     .stat-badge {
         flex: 1;
         min-width: 120px;
+        padding: 10px 12px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
     }
     
     .applications-actions {
         flex-direction: column;
+        width: 100%;
     }
     
     .filter-btn,
     .toggle-status-btn {
         width: 100%;
+        font-size: 13px;
+        padding: 10px;
     }
     
     .application-header {
@@ -2747,8 +3066,24 @@ body.dark-theme .application-text {
         align-items: flex-start;
     }
     
+    .application-info h3 {
+        font-size: 16px;
+    }
+    
+    .application-date {
+        font-size: 12px;
+    }
+    
     .application-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .application-field strong {
+        font-size: 13px;
+    }
+    
+    .application-field p {
+        font-size: 14px;
     }
     
     .application-actions {
@@ -2760,6 +3095,48 @@ body.dark-theme .application-text {
     .reset-btn,
     .delete-app-btn {
         flex: 1;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .apply-header h2 {
+        font-size: 22px;
+    }
+    
+    .apply-info {
+        padding: 20px;
+    }
+    
+    .apply-info h3 {
+        font-size: 18px;
+    }
+    
+    .apply-info li {
+        font-size: 14px;
+        padding: 8px 0 8px 25px;
+    }
+    
+    .apply-form {
+        padding: 20px;
+    }
+    
+    .apply-form h3 {
+        font-size: 18px;
+    }
+    
+    .apply-form label span {
+        font-size: 14px;
+    }
+    
+    .apply-form input,
+    .apply-form textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .submit-btn {
+        font-size: 16px;
+        padding: 12px;
     }
 }
 
@@ -2830,4 +3207,578 @@ body.dark-theme .application-text {
 #password-container-1[style*="display: none"],
 #password-container-2[style*="display: none"] {
     display: none !important;
+}
+
+/* Улучшения для touch-устройств */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем области нажатия для мобильных */
+    nav a,
+    button,
+    .user-menu-toggle,
+    #login-link {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .ip {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+    }
+    
+    form input,
+    form select,
+    form textarea,
+    form button {
+        min-height: 44px;
+    }
+    
+    .filter-btn,
+    .admin-action-btn,
+    .mark-processed-btn,
+    .mark-new-btn,
+    .delete-request-btn,
+    .approve-btn,
+    .reject-btn,
+    .reset-btn,
+    .delete-app-btn {
+        min-height: 44px;
+    }
+    
+    /* Убираем hover эффекты на touch-устройствах */
+    nav a:hover,
+    button:hover,
+    .user-menu-toggle:hover {
+        transform: none;
+    }
+    
+    /* Добавляем active состояния для лучшей обратной связи */
+    nav a:active,
+    button:active,
+    .user-menu-toggle:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 14px;
+    }
+    
+    nav a {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    #login-link,
+    .user-menu-toggle {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .hero h2 {
+        font-size: 18px;
+    }
+    
+    .server-info p {
+        font-size: 13px;
+    }
+    
+    .ip {
+        font-size: 11px;
+    }
+    
+    section {
+        padding: 15px 10px;
+    }
+}
+
+
+/* Мобильная версия админ-панели для телефонов */
+@media (max-width: 480px) {
+    .admin-section {
+        padding: 20px 0;
+    }
+    
+    .admin-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .admin-grid {
+        gap: 15px;
+    }
+    
+    .admin-card {
+        padding: 15px;
+    }
+    
+    .admin-card h3 {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    
+    /* Статистика */
+    .stat-item {
+        padding: 8px 0;
+    }
+    
+    .stat-item span {
+        font-size: 13px;
+    }
+    
+    .stat-item strong {
+        font-size: 16px;
+    }
+    
+    /* Таблица пользователей - карточный вид */
+    .users-table table {
+        min-width: 100%;
+    }
+    
+    .users-table thead {
+        display: none;
+    }
+    
+    .users-table tbody {
+        display: block;
+    }
+    
+    .users-table tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+    
+    body.dark-theme .users-table tr {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .users-table td {
+        display: block;
+        padding: 6px 0;
+        border: none;
+        text-align: left;
+        font-size: 13px;
+    }
+    
+    .users-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 120px;
+        color: var(--primary-color);
+    }
+    
+    .role-select {
+        width: 100%;
+        max-width: 200px;
+        padding: 6px 10px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+    
+    .delete-user-btn {
+        width: 100%;
+        max-width: 200px;
+        padding: 8px 12px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+    
+    /* Информация о сервере */
+    .server-info-admin {
+        font-size: 13px;
+    }
+    
+    .server-info-admin p {
+        font-size: 13px;
+        margin: 6px 0;
+    }
+    
+    /* Быстрые действия */
+    .admin-action-btn {
+        font-size: 14px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Планшетная версия админ-панели */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-section h2 {
+        font-size: 26px;
+    }
+    
+    .admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .admin-card.full-width {
+        grid-column: 1 / -1;
+    }
+    
+    .admin-card {
+        padding: 25px;
+    }
+    
+    .admin-card h3 {
+        font-size: 18px;
+    }
+    
+    .stat-item {
+        padding: 10px 0;
+    }
+    
+    .stat-item span {
+        font-size: 15px;
+    }
+    
+    .stat-item strong {
+        font-size: 20px;
+    }
+    
+    .users-table {
+        font-size: 13px;
+    }
+    
+    .users-table th,
+    .users-table td {
+        padding: 10px 8px;
+    }
+    
+    .role-select {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    
+    .delete-user-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .admin-action-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Очень маленькие экраны для админ-панели */
+@media (max-width: 360px) {
+    .admin-section h2 {
+        font-size: 18px;
+    }
+    
+    .admin-card {
+        padding: 12px;
+    }
+    
+    .admin-card h3 {
+        font-size: 14px;
+    }
+    
+    .stat-item span {
+        font-size: 12px;
+    }
+    
+    .stat-item strong {
+        font-size: 14px;
+    }
+    
+    .users-table td {
+        font-size: 12px;
+    }
+    
+    .users-table td::before {
+        width: 100px;
+        font-size: 11px;
+    }
+    
+    .admin-action-btn {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+
+/* Страница "О нас" */
+.about-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.about-block {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-theme .about-block {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.about-block:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-block h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.about-block p {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.about-block ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.about-block li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.about-block li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Редактор в админ-панели */
+.editor-info {
+    background: rgba(52, 152, 219, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #3498db;
+}
+
+.editor-info p {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+#about-editor-textarea {
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+#about-preview-content {
+    margin-top: 15px;
+}
+
+#about-preview-content .about-block {
+    margin-bottom: 20px;
+}
+
+/* Адаптивность для страницы "О нас" */
+@media (max-width: 768px) {
+    .about-section h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+    
+    .about-block {
+        padding: 20px;
+    }
+    
+    .about-block h3 {
+        font-size: 20px;
+    }
+    
+    .about-block p,
+    .about-block li {
+        font-size: 15px;
+    }
+    
+    #about-editor-textarea {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section h2 {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .about-block {
+        padding: 15px;
+    }
+    
+    .about-block h3 {
+        font-size: 18px;
+    }
+    
+    .about-block p,
+    .about-block li {
+        font-size: 14px;
+    }
+    
+    .editor-info {
+        padding: 12px;
+    }
+    
+    .editor-info p {
+        font-size: 13px;
+    }
+}
+
+
+/* Бейджи ролей */
+.role-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.role-badge.role-owner {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+}
+
+.role-badge.role-admin {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.role-badge.role-user {
+    background: rgba(149, 165, 166, 0.2);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Адаптивность для бейджей */
+@media (max-width: 480px) {
+    .role-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}
+
+
+/* Панель инструментов редактора */
+.editor-toolbar {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+body.dark-theme .editor-toolbar {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.toolbar-btn {
+    padding: 8px 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    min-width: 40px;
+}
+
+.toolbar-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.toolbar-btn:active {
+    transform: translateY(0);
+}
+
+.toolbar-separator {
+    display: inline-block;
+    width: 1px;
+    height: 30px;
+    background: var(--border-color);
+    margin: 0 5px;
+    align-self: center;
+}
+
+/* Адаптивность для панели инструментов */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        padding: 8px;
+        gap: 4px;
+    }
+    
+    .toolbar-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+        min-width: 35px;
+    }
+    
+    .toolbar-separator {
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .editor-toolbar {
+        padding: 6px;
+        gap: 3px;
+    }
+    
+    .toolbar-btn {
+        padding: 5px 8px;
+        font-size: 12px;
+        min-width: 30px;
+    }
+    
+    .toolbar-separator {
+        height: 20px;
+        margin: 0 3px;
+    }
 }

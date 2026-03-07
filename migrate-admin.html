@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Миграция роли администратора</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #229954;
+        }
+        .danger {
+            background: #e74c3c;
+        }
+        .danger:hover {
+            background: #c0392b;
+        }
+        .info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .result.success {
+            background: rgba(39, 174, 96, 0.3);
+            border: 2px solid #27ae60;
+        }
+        .result.error {
+            background: rgba(231, 76, 60, 0.3);
+            border: 2px solid #e74c3c;
+        }
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Миграция роли администратора</h1>
+        
+        <div class="info">
+            <p><strong>Эта страница обновит роль аккаунта "admin" на "Создатель"</strong></p>
+            <p>Текущие пользователи в системе: <span id="user-count">0</span></p>
+        </div>
+
+        <button onclick="migrateAdmin()">👑 Обновить роль admin на Создатель</button>
+        <button onclick="showUsers()">👥 Показать всех пользователей</button>
+        <button onclick="resetData()" class="danger">🗑️ Сбросить все данные (осторожно!)</button>
+        
+        <div id="result" class="result"></div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="index.html">← Вернуться на главную</a>
+        </div>
+    </div>
+
+    <script>
+        // Показать количество пользователей
+        function updateUserCount() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            document.getElementById('user-count').textContent = users.length;
+        }
+        
+        updateUserCount();
+
+        // Миграция роли admin
+        function migrateAdmin() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const resultDiv = document.getElementById('result');
+            
+            if (users.length === 0) {
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '❌ Нет пользователей в системе. Создайте аккаунт admin через страницу входа.';
+                return;
+            }
+            
+            // Находим пользователя admin
+            const adminIndex = users.findIndex(u => u.username === 'admin');
+            
+            if (adminIndex === -1) {
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '❌ Пользователь "admin" не найден. Создайте его через страницу входа.';
+                return;
+            }
+            
+            // Обновляем роль
+            const oldRole = users[adminIndex].role;
+            users[adminIndex].role = 'owner';
+            
+            // Сохраняем
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Обновляем текущего пользователя, если он залогинен
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.username === 'admin') {
+                currentUser.role = 'owner';
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            
+            resultDiv.className = 'result success';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                ✅ Успешно обновлено!<br>
+                Пользователь: admin<br>
+                Старая роль: ${oldRole === 'admin' ? '⚙️ Администратор' : oldRole === 'owner' ? '👑 Создатель' : '👤 Пользователь'}<br>
+                Новая роль: 👑 Создатель<br><br>
+                ${currentUser && currentUser.username === 'admin' ? 'Ваша текущая сессия также обновлена.' : ''}
+            `;
+            
+            updateUserCount();
+        }
+
+        // Показать всех пользователей
+        function showUsers() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const resultDiv = document.getElementById('result');
+            
+            if (users.length === 0) {
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '❌ Нет пользователей в системе.';
+                return;
+            }
+            
+            let html = '<strong>Список пользователей:</strong><br><br>';
+            users.forEach((user, index) => {
+                const roleIcon = user.role === 'owner' ? '👑' : user.role === 'admin' ? '⚙️' : '👤';
+                const roleName = user.role === 'owner' ? 'Создатель' : user.role === 'admin' ? 'Администратор' : 'Пользователь';
+                html += `${index + 1}. ${roleIcon} <strong>${user.username}</strong> - ${roleName}<br>`;
+            });
+            
+            resultDiv.className = 'result success';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = html;
+        }
+
+        // Сброс всех данных
+        function resetData() {
+            if (!confirm('⚠️ Вы уверены? Это удалит ВСЕ данные (пользователей, заявки, запросы)!')) {
+                return;
+            }
+            
+            if (!confirm('⚠️ ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ! Все данные будут безвозвратно удалены!')) {
+                return;
+            }
+            
+            // Удаляем все данные
+            localStorage.removeItem('users');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('supportRequests');
+            localStorage.removeItem('adminApplications');
+            localStorage.removeItem('applicationsOpen');
+            localStorage.removeItem('aboutContent');
+            localStorage.removeItem('theme');
+            
+            // Создаем нового создателя
+            const defaultOwner = {
+                username: 'admin',
+                email: 'admin@verdantelegy.com',
+                minecraft: 'Admin',
+                password: 'admin123',
+                role: 'owner',
+                createdAt: new Date().toISOString()
+            };
+            localStorage.setItem('users', JSON.stringify([defaultOwner]));
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result success';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                ✅ Все данные сброшены!<br><br>
+                Создан новый аккаунт создателя:<br>
+                Логин: <strong>admin</strong><br>
+                Пароль: <strong>admin123</strong><br>
+                Роль: 👑 Создатель
+            `;
+            
+            updateUserCount();
+        }
+    </script>
+</body>
+</html>

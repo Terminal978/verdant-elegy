@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant Elegy - Поддержка</title>
+    <title>Verdant Elegy - О нас</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css?v=7">
 </head>
@@ -38,35 +38,34 @@
     </header>
 
     <main class="container">
-        <section id="support" class="support-section">
-            <h2>Центр поддержки</h2>
-            
-            <div class="discord-support">
-                <div class="discord-icon">💬</div>
-                <h3>Свяжитесь с нами в Discord</h3>
-                <p>Самый быстрый способ получить помощь - написать нам в Discord сервер</p>
-                <a href="https://discord.gg/Eqp8RDYnpX" target="_blank" class="discord-btn">Присоединиться к Discord</a>
-            </div>
+        <section class="about-section">
+            <h2>📖 О нас</h2>
+            <div class="about-content" id="about-content">
+                <div class="about-block">
+                    <h3>🎮 Наш сервер</h3>
+                    <p>Verdant Elegy - это уютный Minecraft сервер, где каждый игрок может найти что-то для себя. Мы создали дружелюбное сообщество, где ценятся взаимопомощь и креативность.</p>
+                </div>
 
-            <div class="support-divider">
-                <span>или</span>
-            </div>
+                <div class="about-block">
+                    <h3>🌟 Наша миссия</h3>
+                    <p>Мы стремимся создать лучший игровой опыт для всех наших игроков. Наша цель - построить сообщество, где каждый чувствует себя как дома.</p>
+                </div>
 
-            <div class="support-form">
-                <h3>Отправить запрос через форму</h3>
-                <p style="text-align: center; color: #666; margin-bottom: 20px;">Ответ придет в Discord канал поддержки</p>
-                <form id="supportForm">
-                    <input type="text" id="username" placeholder="Ваш ник в игре" required>
-                    <input type="email" id="email" placeholder="Email" required>
-                    <select id="category" required>
-                        <option value="">Выберите категорию</option>
-                        <option value="bug">Баг/Ошибка</option>
-                        <option value="grief">Жалоба на игрока</option>
-                        <option value="other">Другое</option>
-                    </select>
-                    <textarea id="message" placeholder="Опишите вашу проблему" rows="5" required></textarea>
-                    <button type="submit">Отправить</button>
-                </form>
+                <div class="about-block">
+                    <h3>👥 Команда</h3>
+                    <p>Наша команда администраторов работает круглосуточно, чтобы обеспечить комфортную игру. Мы всегда готовы помочь и ответить на ваши вопросы.</p>
+                </div>
+
+                <div class="about-block">
+                    <h3>🎯 Особенности</h3>
+                    <ul>
+                        <li>Стабильная работа сервера 24/7</li>
+                        <li>Дружелюбное сообщество</li>
+                        <li>Регулярные обновления и события</li>
+                        <li>Защита от гриферов</li>
+                        <li>Активная администрация</li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -78,5 +77,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="about.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 // Проверка доступа
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-if (!currentUser || currentUser.role !== 'admin') {
+if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'owner')) {
     alert('❌ Доступ запрещен! Только для администраторов.');
     window.location.href = 'login.html';
 }
