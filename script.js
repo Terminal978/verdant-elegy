@@ -235,54 +235,63 @@ const chatMessages = document.getElementById('chatMessages');
 // WebSocket connection
 let ws = null;
 let reconnectInterval = null;
+let wsEnabled = false; // Отключаем WebSocket по умолчанию
 
 // WebSocket URL - замените на адрес вашего сервера
 const WS_URL = 'ws://localhost:3000'; // Для локальной разработки
 // const WS_URL = 'wss://your-server.com'; // Для продакшена
 
 function connectWebSocket() {
-    ws = new WebSocket(WS_URL);
+    if (!wsEnabled) return; // Не подключаемся, если отключено
     
-    ws.onopen = () => {
-        console.log('Connected to chat server');
-        if (reconnectInterval) {
-            clearInterval(reconnectInterval);
-            reconnectInterval = null;
-        }
-    };
-    
-    ws.onmessage = (event) => {
-        try {
-            const data = JSON.parse(event.data);
-            
-            if (data.type === 'admin_message') {
-                addMessage(data.text, 'bot');
-            } else if (data.type === 'system') {
-                console.log('System:', data.message);
+    try {
+        ws = new WebSocket(WS_URL);
+        
+        ws.onopen = () => {
+            console.log('Connected to chat server');
+            if (reconnectInterval) {
+                clearInterval(reconnectInterval);
+                reconnectInterval = null;
             }
-        } catch (error) {
-            console.error('Error parsing message:', error);
-        }
-    };
-    
-    ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-    };
-    
-    ws.onclose = () => {
-        console.log('Disconnected from chat server');
-        // Try to reconnect every 5 seconds
-        if (!reconnectInterval) {
-            reconnectInterval = setInterval(() => {
-                console.log('Attempting to reconnect...');
-                connectWebSocket();
-            }, 5000);
-        }
-    };
+        };
+        
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'admin_message') {
+                    addMessage(data.text, 'bot');
+                } else if (data.type === 'system') {
+                    console.log('System:', data.message);
+                }
+            } catch (error) {
+                console.error('Error parsing message:', error);
+            }
+        };
+        
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+        
+        ws.onclose = () => {
+            console.log('Disconnected from chat server');
+            // Try to reconnect every 5 seconds
+            if (!reconnectInterval && wsEnabled) {
+                reconnectInterval = setInterval(() => {
+                    console.log('Attempting to reconnect...');
+                    connectWebSocket();
+                }, 5000);
+            }
+        };
+    } catch (error) {
+        console.error('Failed to create WebSocket:', error);
+    }
 }
 
-// Connect on page load
-connectWebSocket();
+// Подключаемся только если включено
+if (wsEnabled) {
+    connectWebSocket();
+}
 
 if (chatBtn && chatPopup) {
     chatBtn.addEventListener('click', function() {
