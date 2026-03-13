@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant Elegy - Поддержка</title>
+    <title>Verdant Elegy - Состав команды</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🎮 Verdant Elegy</h1></a>
             <nav>
                 <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
@@ -24,10 +24,13 @@
                 <div class="user-menu-dropdown">
                     <div class="user-menu-toggle" id="user-menu-toggle">
                         <span id="username-display"></span>
-                        <span>▼</span>
+         
+               <span>▼</span>
                     </div>
                     <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                        <a href="requests.html">📧 Запросы поддержки</a>
+                        <a href="applications.html">⚡ Заявки на админа</a>
+                        <a href="admin.html" class="admin-link" id="admin-menu-link">⚙️ Админ панель</a>
                         <button id="logout-btn" class="logout-btn">Выйти</button>
                     </div>
                 </div>
@@ -40,31 +43,10 @@
     </header>
 
     <main class="container">
-        <section id="home" class="hero">
-            <h2>Добро пожаловать на наш сервер!</h2>
-            <div class="server-info">
-                <p><strong>IP сервера:</strong> <span class="ip" id="serverIP" title="Нажмите, чтобы скопировать">213.152.43.61:25775</span></p>
-                <p><strong>Версия:</strong> 1.16.5</p>
-                <p><strong>Статус:</strong> <span id="serverStatus" class="status-loading">Проверка...</span></p>
-                <p id="onlineInfo" style="display: none;"><strong>Онлайн:</strong> <span id="playerCount">0</span> / <span id="maxPlayers">0</span></p>
-            </div>
-        </section>
-
-        <section class="faq-section">
-            <h2>Частые вопросы</h2>
-            <div class="faq">
-                <div class="faq-item">
-                    <h4>Как зайти на сервер?</h4>
-                    <p>Скопируйте IP адрес и добавьте сервер в списке мультиплеера.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>Какие правила на сервере?</h4>
-                    <p>Запрещен читинг, оскорбления игроков.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>Как получить привилегии?</h4>
-                    <p>Привилегии можно получить через донат.</p>
-                </div>
+        <section class="team-section">
+            <h2>👥 Состав команды</h2>
+            <div class="team-content" id="team-content">
+                <!-- Контент загружается из localStorage или показывается по умолчанию -->
             </div>
         </section>
     </main>
@@ -76,5 +58,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="team.js"></script>
 </body>
 </html>
