@@ -505,6 +505,298 @@ document.getElementById('edit-about-btn').addEventListener('click', () => {
     aboutEditor.scrollIntoView({ behavior: 'smooth' });
 });
 
+// Редактор команды
+const teamEditor = document.getElementById('team-editor');
+const teamEditorTextarea = document.getElementById('team-editor-textarea');
+const teamPreview = document.getElementById('team-preview');
+const teamPreviewContent = document.getElementById('team-preview-content');
+
+// Кнопка "Редактировать команду"
+document.getElementById('edit-team-btn').addEventListener('click', () => {
+    if (!isOwner) {
+        alert('❌ Только создатель может редактировать состав команды!');
+        return;
+    }
+    
+    // Загружаем текущее содержимое
+    const currentContent = localStorage.getItem('teamContent') || getDefaultTeamContent();
+    teamEditorTextarea.value = currentContent;
+    
+    // Показываем редактор
+    teamEditor.style.display = 'block';
+    teamEditor.scrollIntoView({ behavior: 'smooth' });
+    
+    // Показываем подсказку при первом открытии
+    if (!localStorage.getItem('teamEditorHintShown')) {
+        setTimeout(() => {
+            alert('💡 Подсказка:\n\n' +
+                  '👤 - Быстро добавить члена команды\n' +
+                  '📁 - Создать новую категорию\n' +
+                  '📝 - Добавить вступительный текст\n' +
+                  '⚡ - Добавить призыв к действию\n\n' +
+                  'Используйте эти кнопки для быстрого создания структуры!');
+            localStorage.setItem('teamEditorHintShown', 'true');
+        }, 500);
+    }
+});
+
+// Кнопка "Сбросить команду"
+document.getElementById('reset-team-btn').addEventListener('click', () => {
+    if (!isOwner) {
+        alert('❌ Только создатель может сбросить состав команды!');
+        return;
+    }
+    
+    if (confirm('⚠️ Сбросить состав команды к настройкам по умолчанию?\n\nВсе текущие изменения будут потеряны!')) {
+        localStorage.removeItem('teamContent');
+        alert('✅ Состав команды сброшен к настройкам по умолчанию!\n\nОбновите страницу team.html чтобы увидеть изменения.');
+    }
+});
+
+// Кнопка "Сохранить команду"
+document.getElementById('save-team-btn').addEventListener('click', () => {
+    const content = teamEditorTextarea.value.trim();
+    
+    if (!content) {
+        alert('❌ Содержимое не может быть пустым!');
+        return;
+    }
+    
+    // Сохраняем в localStorage
+    localStorage.setItem('teamContent', content);
+    
+    alert('✅ Состав команды успешно обновлен!');
+    teamEditor.style.display = 'none';
+    teamPreview.style.display = 'none';
+});
+
+// Кнопка "Предпросмотр команды"
+document.getElementById('preview-team-btn').addEventListener('click', () => {
+    const content = teamEditorTextarea.value.trim();
+    
+    if (!content) {
+        alert('❌ Нечего предпросматривать!');
+        return;
+    }
+    
+    teamPreviewContent.innerHTML = content;
+    teamPreview.style.display = 'block';
+});
+
+// Кнопка "Отмена команды"
+document.getElementById('cancel-team-btn').addEventListener('click', () => {
+    if (confirm('Отменить изменения?')) {
+        teamEditor.style.display = 'none';
+        teamPreview.style.display = 'none';
+    }
+});
+
+// Получить содержимое команды по умолчанию
+function getDefaultTeamContent() {
+    return `<div class="team-intro">
+    <p>Наша команда состоит из опытных и преданных администраторов, которые работают над тем, чтобы сделать ваш игровой опыт незабываемым.</p>
+</div>
+
+<div class="team-category">
+    <h3>👑 Создатель проекта</h3>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-avatar">👑</div>
+            <div class="member-info">
+                <h4 class="member-name">Admin</h4>
+                <p class="member-role">Создатель и владелец</p>
+                <p class="member-description">Основатель сервера Verdant Elegy. Отвечает за общее развитие проекта и принятие ключевых решений.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-category">
+    <h3>🏆 Главный администратор</h3>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-avatar">🏆</div>
+            <div class="member-info">
+                <h4 class="member-name">Имя главного администратора</h4>
+                <p class="member-role">Главный администратор</p>
+                <p class="member-description">Руководит командой администрации, принимает важные решения и координирует работу сервера.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-category">
+    <h3>🛠️ Модераторы</h3>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-avatar">🛠️</div>
+            <div class="member-info">
+                <h4 class="member-name">Имя модератора</h4>
+                <p class="member-role">Модератор</p>
+                <p class="member-description">Следит за порядком на сервере, помогает игрокам и решает конфликтные ситуации.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-category">
+    <h3>⚙️ Администраторы</h3>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-avatar">⚙️</div>
+            <div class="member-info">
+                <h4 class="member-name">Имя администратора</h4>
+                <p class="member-role">Администратор</p>
+                <p class="member-description">Помогает поддерживать порядок в чате и следит за соблюдением правил.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-join">
+    <h3>🌟 Хочешь присоединиться к команде?</h3>
+    <p>Мы всегда ищем ответственных и активных игроков для пополнения нашей команды!</p>
+    <a href="apply.html" class="join-team-btn">⚡ Подать заявку</a>
+</div>`;
+}
+
+// Функции форматирования для редактора команды
+function formatTeamText(format) {
+    const textarea = document.getElementById('team-editor-textarea');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    
+    if (!selectedText) {
+        alert('Выделите текст для форматирования');
+        return;
+    }
+    
+    let formattedText = '';
+    switch(format) {
+        case 'bold':
+            formattedText = `<strong>${selectedText}</strong>`;
+            break;
+        case 'italic':
+            formattedText = `<em>${selectedText}</em>`;
+            break;
+        case 'underline':
+            formattedText = `<u>${selectedText}</u>`;
+            break;
+    }
+    
+    textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+    textarea.focus();
+    textarea.setSelectionRange(start, start + formattedText.length);
+}
+
+function insertTeamHeading() {
+    const textarea = document.getElementById('team-editor-textarea');
+    const text = prompt('Введите заголовок категории (например: 👑 Создатель проекта):');
+    if (text) {
+        insertAtTeamCursor(textarea, `<h3>${text}</h3>\n`);
+    }
+}
+
+function insertTeamMember() {
+    const name = prompt('Имя члена команды:');
+    if (!name) return;
+    
+    const role = prompt('Роль/должность:');
+    if (!role) return;
+    
+    const description = prompt('Описание обязанностей:');
+    if (!description) return;
+    
+    const emoji = prompt('Эмодзи для аватара (например: 👑, ⚙️, 🛠️):') || '👤';
+    
+    const textarea = document.getElementById('team-editor-textarea');
+    const member = `<div class="team-member">
+    <div class="member-avatar">${emoji}</div>
+    <div class="member-info">
+        <h4 class="member-name">${name}</h4>
+        <p class="member-role">${role}</p>
+        <p class="member-description">${description}</p>
+    </div>
+</div>\n`;
+    insertAtTeamCursor(textarea, member);
+}
+
+function insertTeamCategory() {
+    const title = prompt('Название категории (например: ⚙️ Администраторы):');
+    if (!title) return;
+    
+    const textarea = document.getElementById('team-editor-textarea');
+    const category = `<div class="team-category">
+    <h3>${title}</h3>
+    <div class="team-grid">
+        <!-- Добавьте членов команды здесь -->
+    </div>
+</div>\n`;
+    insertAtTeamCursor(textarea, category);
+}
+
+function insertTeamIntro() {
+    const text = prompt('Текст вступления:');
+    if (!text) return;
+    
+    const textarea = document.getElementById('team-editor-textarea');
+    const intro = `<div class="team-intro">
+    <p>${text}</p>
+</div>\n`;
+    insertAtTeamCursor(textarea, intro);
+}
+
+function insertTeamJoin() {
+    const title = prompt('Заголовок призыва (например: 🌟 Хочешь присоединиться к команде?):');
+    if (!title) return;
+    
+    const text = prompt('Текст призыва:');
+    if (!text) return;
+    
+    const textarea = document.getElementById('team-editor-textarea');
+    const join = `<div class="team-join">
+    <h3>${title}</h3>
+    <p>${text}</p>
+    <a href="apply.html" class="join-team-btn">⚡ Подать заявку</a>
+</div>\n`;
+    insertAtTeamCursor(textarea, join);
+}
+
+function insertTeamDivider() {
+    const textarea = document.getElementById('team-editor-textarea');
+    insertAtTeamCursor(textarea, '\n<hr>\n');
+}
+
+function insertTeamBreak() {
+    const textarea = document.getElementById('team-editor-textarea');
+    insertAtTeamCursor(textarea, '<br>\n');
+}
+
+function insertAtTeamCursor(textarea, text) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(end);
+    textarea.focus();
+    textarea.setSelectionRange(start + text.length, start + text.length);
+}
+
+// Кнопка "Редактировать О нас"
+document.getElementById('edit-about-btn').addEventListener('click', () => {
+    if (!isOwner) {
+        alert('❌ Только создатель может редактировать страницу "О нас"!');
+        return;
+    }
+    
+    // Загружаем текущее содержимое
+    const currentContent = localStorage.getItem('aboutContent') || getDefaultAboutContent();
+    aboutEditorTextarea.value = currentContent;
+    
+    // Показываем редактор
+    aboutEditor.style.display = 'block';
+    aboutEditor.scrollIntoView({ behavior: 'smooth' });
+});
+
 // Кнопка "Сохранить"
 document.getElementById('save-about-btn').addEventListener('click', () => {
     const content = aboutEditorTextarea.value.trim();
