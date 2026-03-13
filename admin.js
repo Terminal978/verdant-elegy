@@ -56,7 +56,15 @@ function loadUsers() {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const tbody = document.getElementById('users-list');
     
+    console.log('📊 Загружено пользователей:', users.length);
+    console.log('👥 Список пользователей:', users);
+    
     tbody.innerHTML = '';
+    
+    if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 20px; color: #999;">Нет зарегистрированных пользователей</td></tr>';
+        return;
+    }
     
     users.forEach((user, index) => {
         const tr = document.createElement('tr');
@@ -568,3 +576,23 @@ function getDefaultAboutContent() {
 loadStats();
 loadUsers();
 checkServerStatus();
+
+// Кнопка обновления списка пользователей
+document.getElementById('refresh-users-btn').addEventListener('click', () => {
+    const btn = document.getElementById('refresh-users-btn');
+    btn.style.pointerEvents = 'none'; // Блокируем повторные клики
+    
+    loadStats();
+    loadUsers();
+    
+    // Возвращаем возможность клика через 1 секунду
+    setTimeout(() => {
+        btn.style.pointerEvents = 'auto';
+    }, 1000);
+});
+
+// Автоматическое обновление каждые 5 секунд
+setInterval(() => {
+    loadStats();
+    loadUsers();
+}, 5000);

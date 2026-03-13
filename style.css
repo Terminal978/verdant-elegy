@@ -3231,6 +3231,33 @@ body.dark-theme .application-text {
     transform: scale(1.05);
 }
 
+/* Кнопка обновления (иконка) */
+.refresh-icon-btn {
+    background: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    color: white;
+}
+
+.refresh-icon-btn:hover {
+    background: var(--secondary-color);
+    transform: rotate(180deg) scale(1.05);
+}
+
+.refresh-icon-btn:active {
+    transform: rotate(360deg) scale(0.95);
+}
+
 .eye-icon {
     user-select: none;
     display: block;

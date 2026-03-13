@@ -177,6 +177,9 @@ document.getElementById('registerForm').addEventListener('submit', (e) => {
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     
+    console.log('✅ Новый пользователь зарегистрирован:', newUser);
+    console.log('📊 Всего пользователей:', users.length);
+    
     messageEl.textContent = '✅ Регистрация успешна! Теперь войдите в аккаунт';
     messageEl.style.color = '#27ae60';
     

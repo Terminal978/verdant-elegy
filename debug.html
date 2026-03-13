@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Verdant Elegy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .debug-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #229954;
+        }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug Panel - Verdant Elegy</h1>
+    
+    <div class="debug-section">
+        <h2>👥 Пользователи в localStorage</h2>
+        <button onclick="showUsers()">Показать пользователей</button>
+        <button onclick="clearUsers()">Очистить всех пользователей</button>
+        <button onclick="addTestUser()">Добавить тестового пользователя</button>
+        <pre id="users-output">Нажмите "Показать пользователей"</pre>
+    </div>
+    
+    <div class="debug-section">
+        <h2>📊 Статистика</h2>
+        <div id="stats-output"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🔄 Действия</h2>
+        <button onclick="location.href='admin.html'">Перейти в админ-панель</button>
+        <button onclick="location.href='login.html'">Перейти к регистрации</button>
+        <button onclick="location.reload()">Обновить страницу</button>
+    </div>
+
+    <script>
+        function showUsers() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            document.getElementById('users-output').textContent = JSON.stringify(users, null, 2);
+            updateStats();
+        }
+        
+        function clearUsers() {
+            if (confirm('Удалить всех пользователей?')) {
+                localStorage.removeItem('users');
+                showUsers();
+                alert('✅ Все пользователи удалены');
+            }
+        }
+        
+        function addTestUser() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const testUser = {
+                username: 'test_user_' + Date.now(),
+                email: 'test' + Date.now() + '@example.com',
+                minecraft: 'TestPlayer',
+                password: 'test123',
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                emailVerified: true
+            };
+            users.push(testUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            showUsers();
+            alert('✅ Тестовый пользователь добавлен');
+        }
+        
+        function updateStats() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const admins = users.filter(u => u.role === 'admin' || u.role === 'owner').length;
+            const regular = users.filter(u => u.role === 'user').length;
+            
+            document.getElementById('stats-output').innerHTML = `
+                <p><strong>Всего пользователей:</strong> ${users.length}</p>
+                <p><strong>Администраторов:</strong> ${admins}</p>
+                <p><strong>Обычных пользователей:</strong> ${regular}</p>
+            `;
+        }
+        
+        // Автоматическое обновление при загрузке
+        showUsers();
+    </script>
+</body>
+</html>
