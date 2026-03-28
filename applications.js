@@ -256,3 +256,56 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 updateStats();
 updateStatusButton();
 displayApplications();
+
+// Ручной импорт заявки
+document.getElementById('manual-import-btn').addEventListener('click', () => {
+    const form = document.getElementById('manual-import-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+});
+
+document.getElementById('imp-cancel-btn').addEventListener('click', () => {
+    document.getElementById('manual-import-form').style.display = 'none';
+    clearImportForm();
+});
+
+document.getElementById('imp-save-btn').addEventListener('click', () => {
+    const nick = document.getElementById('imp-nick').value.trim();
+    const age = document.getElementById('imp-age').value.trim();
+    const discord = document.getElementById('imp-discord').value.trim();
+
+    if (!nick || !age || !discord) {
+        alert('❌ Заполните обязательные поля: Ник, Возраст, Discord');
+        return;
+    }
+
+    const application = {
+        id: Date.now().toString(),
+        minecraftNick: nick,
+        age: age,
+        discord: discord,
+        playTime: document.getElementById('imp-playtime').value.trim() || '—',
+        dailyHours: document.getElementById('imp-hours').value.trim() || '—',
+        adminExperience: document.getElementById('imp-experience').value.trim() || '—',
+        motivation: document.getElementById('imp-motivation').value.trim() || '—',
+        conflictSituation: document.getElementById('imp-conflict').value.trim() || '—',
+        additionalInfo: document.getElementById('imp-additional').value.trim(),
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+        source: 'manual'
+    };
+
+    const applications = getApplications();
+    applications.push(application);
+    saveApplications(applications);
+    updateStats();
+    displayApplications(currentFilter);
+
+    document.getElementById('manual-import-form').style.display = 'none';
+    clearImportForm();
+    alert('✅ Заявка добавлена!');
+});
+
+function clearImportForm() {
+    ['imp-nick','imp-age','imp-discord','imp-playtime','imp-hours','imp-experience','imp-motivation','imp-conflict','imp-additional']
+        .forEach(id => document.getElementById(id).value = '');
+}

@@ -14,10 +14,10 @@
             <nav>
                 <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="gallery.html" class="auth-required">📸 Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">⚡ Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать проект</a>
             </nav>
             <div class="user-menu">
                 <div class="user-menu-dropdown">
@@ -69,6 +69,54 @@
                     <button class="filter-btn" data-filter="pending">На рассмотрении</button>
                     <button class="filter-btn" data-filter="approved">Одобрено</button>
                     <button class="filter-btn" data-filter="rejected">Отклонено</button>
+                    <button class="filter-btn" id="manual-import-btn" style="background: #e67e22; color: white; border: none;">📋 Добавить вручную</button>
+                </div>
+            </div>
+
+            <!-- Форма ручного импорта -->
+            <div id="manual-import-form" style="display:none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin-top:0;">📋 Добавить заявку вручную (из Discord)</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                        <label>👤 Minecraft ник *</label>
+                        <input type="text" id="imp-nick" placeholder="Ник игрока" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
+                    </div>
+                    <div>
+                        <label>🎂 Возраст *</label>
+                        <input type="number" id="imp-age" placeholder="Возраст" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
+                    </div>
+                    <div>
+                        <label>💬 Discord *</label>
+                        <input type="text" id="imp-discord" placeholder="Discord тег" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
+                    </div>
+                    <div>
+                        <label>⏱️ Время на сервере</label>
+                        <input type="text" id="imp-playtime" placeholder="Например: 2 недели" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
+                    </div>
+                    <div>
+                        <label>📅 Активность в день</label>
+                        <input type="text" id="imp-hours" placeholder="Например: 3-4 часа" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
+                    </div>
+                </div>
+                <div style="margin-top:12px;">
+                    <label>🎓 Опыт администрирования</label>
+                    <textarea id="imp-experience" rows="2" placeholder="Опыт..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
+                </div>
+                <div style="margin-top:12px;">
+                    <label>💡 Мотивация</label>
+                    <textarea id="imp-motivation" rows="2" placeholder="Мотивация..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
+                </div>
+                <div style="margin-top:12px;">
+                    <label>⚖️ Конфликтная ситуация</label>
+                    <textarea id="imp-conflict" rows="2" placeholder="Как бы поступил..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
+                </div>
+                <div style="margin-top:12px;">
+                    <label>📝 Дополнительно</label>
+                    <textarea id="imp-additional" rows="2" placeholder="Доп. информация..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
+                </div>
+                <div style="margin-top:16px; display:flex; gap:10px;">
+                    <button id="imp-save-btn" style="background:#27ae60; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px;">✅ Сохранить заявку</button>
+                    <button id="imp-cancel-btn" style="background:#e74c3c; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px;">✖ Отмена</button>
                 </div>
             </div>
 
