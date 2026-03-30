@@ -3,59 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant Elegy - Оффициальный сайт</title>
+    <title>Verdant Elegy</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo">
+                <img src="favicon.svg" alt="" width="20" height="20">
+                VERDANT ELEGY
+            </a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html" class="auth-required">📸 Галерея</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
                 <a href="support.html" class="auth-required">Поддержка</a>
-                <a href="apply.html" class="auth-required">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать проект</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu" id="user-menu-container" style="display: none;">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu" id="user-menu-container" style="display: none;">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <a href="login.html" id="login-link" class="login-btn">🔐 Вход</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                    <span class="theme-toggle-slider"></span>
+                </button>
             </div>
-            <a href="login.html" id="login-link" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; white-space: nowrap; text-decoration: none; color: white;">🔐 Вход</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
-    <main class="container">
-        <section id="home" class="hero">
-            <h2>Добро пожаловать на наш сервер!</h2>
-            <div class="server-info">
-                <p><strong>IP сервера:</strong> <span class="ip" id="serverIP" title="Нажмите, чтобы скопировать">213.152.43.61:25775</span></p>
-                <p><strong>Версия:</strong> 1.20.2</p>
-                <p><strong>Статус:</strong> <span id="serverStatus" class="status-loading">Проверка...</span></p>
-                <p id="onlineInfo" style="display: none;"><strong>Онлайн:</strong> <span id="playerCount">0</span> / <span id="maxPlayers">0</span></p>
+    <section class="hero-fullscreen">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Minecraft сервер версии 1.20.2 — присоединяйся и играй прямо сейчас.</p>
+            <h1 class="hero-title">ДОБРО ПОЖАЛОВАТЬ НА<br><span class="hero-title-green">VERDANT ELEGY</span></h1>
+            <div class="hero-divider"></div>
+            <div class="server-info-box">
+                <p><span class="info-label">IP:</span> <span class="ip" id="serverIP" title="Нажмите, чтобы скопировать">213.152.43.61:25775</span></p>
+                <p><span class="info-label">Версия:</span> 1.20.2</p>
+                <p><span class="info-label">Статус:</span> <span id="serverStatus" class="status-loading">Проверка...</span></p>
+                <p id="onlineInfo" style="display:none;"><span class="info-label">Онлайн:</span> <span id="playerCount">0</span> / <span id="maxPlayers">0</span></p>
             </div>
-        </section>
+            <div class="hero-buttons">
+                <a href="https://minecraftrating.ru/server/393660/" target="_blank" class="hero-btn-primary">🟩 ГОЛОСОВАТЬ ЗА СЕРВЕР</a>
+                <a href="rules.html" class="hero-btn-secondary">ПРАВИЛА СЕРВЕРА</a>
+            </div>
+        </div>
+    </section>
 
-        <section style="text-align: center; margin: 20px 0;">
-            <a href="https://minecraftrating.ru/server/393660/" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: #4caf50; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: bold;">
-                🟩 Голосовать за сервер
-            </a>
-        </section>
-
+    <main class="container">
         <section class="faq-section">
             <h2>Частые вопросы</h2>
             <div class="faq">

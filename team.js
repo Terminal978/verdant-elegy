@@ -52,6 +52,17 @@ function loadTeamContent() {
     const teamContent = document.getElementById('team-content');
     const savedContent = localStorage.getItem('teamContent');
     
+    // Сбрасываем старый контент если он содержит вложенные карточки (баг старой версии)
+    if (savedContent && savedContent.includes('class="team-member"') && savedContent.indexOf('class="team-member"') !== savedContent.lastIndexOf('class="team-member"')) {
+        const nested = (savedContent.match(/class="team-member"/g) || []).length;
+        const grids = (savedContent.match(/class="team-grid"/g) || []).length;
+        if (nested > grids * 2) {
+            localStorage.removeItem('teamContent');
+            teamContent.innerHTML = getDefaultTeamContent();
+            return;
+        }
+    }
+    
     if (savedContent) {
         teamContent.innerHTML = savedContent;
     } else {
@@ -67,42 +78,30 @@ function getDefaultTeamContent() {
 </div>
 
 <div class="team-category">
-    <h3>👑 Создатель проекта</h3>
+    <h3>👑 Руководство</h3>
     <div class="team-grid">
         <div class="team-member">
             <div class="member-avatar">👑</div>
             <div class="member-info">
-                <h4 class="member-name">Admin</h4>
+                <h4 class="member-name">Kapychinooo</h4>
                 <p class="member-role">Создатель и владелец</p>
                 <p class="member-description">Основатель сервера Verdant Elegy. Отвечает за общее развитие проекта и принятие ключевых решений.</p>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="team-category">
-    <h3>🏆 Главный администратор</h3>
-    <div class="team-grid">
         <div class="team-member">
-            <div class="member-avatar">🏆</div>
+            <div class="member-avatar">💎</div>
             <div class="member-info">
-                <h4 class="member-name">Имя главного администратора</h4>
-                <p class="member-role">Главный администратор</p>
-                <p class="member-description">Руководит командой администрации, принимает важные решения и координирует работу сервера.</p>
+                <h4 class="member-name">kaktus_001</h4>
+                <p class="member-role">Руководитель проекта</p>
+                <p class="member-description">Отвечает за помощь основателю, помогает ему в управлении сервером.</p>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="team-category">
-    <h3>🛠️ Модераторы</h3>
-    <div class="team-grid">
         <div class="team-member">
-            <div class="member-avatar">🛠️</div>
+            <div class="member-avatar">💎</div>
             <div class="member-info">
-                <h4 class="member-name">Имя модератора</h4>
-                <p class="member-role">Модератор</p>
-                <p class="member-description">Следит за порядком на сервере, помогает игрокам и решает конфликтные ситуации.</p>
+                <h4 class="member-name">Savalim</h4>
+                <p class="member-role">Строитель, руководитель сервера</p>
+                <p class="member-description">Отвечает за постройки спавна и т.п.</p>
             </div>
         </div>
     </div>
@@ -116,7 +115,7 @@ function getDefaultTeamContent() {
             <div class="member-info">
                 <h4 class="member-name">Имя администратора</h4>
                 <p class="member-role">Администратор</p>
-                <p class="member-description">Помогает поддерживать порядок в чате и следит за соблюдением правил.</p>
+                <p class="member-description">Помогает поддерживать порядок и следит за соблюдением правил.</p>
             </div>
         </div>
     </div>
@@ -124,7 +123,7 @@ function getDefaultTeamContent() {
 
 <div class="team-join">
     <h3>🌟 Хочешь присоединиться к команде?</h3>
-    <p>Мы всегда ищем ответственных и активных игроков для пополнения нашей команды!</p>
+    <p>Мы всегда ищем ответственных и активных игроков!</p>
     <a href="apply.html" class="join-team-btn">⚡ Подать заявку</a>
 </div>
 `;
@@ -132,4 +131,9 @@ function getDefaultTeamContent() {
 
 // Инициализация
 checkAuth();
+// Принудительно сбрасываем старый контент команды (версия до редизайна)
+if (localStorage.getItem('teamContentVersion') !== '2') {
+    localStorage.removeItem('teamContent');
+    localStorage.setItem('teamContentVersion', '2');
+}
 loadTeamContent();

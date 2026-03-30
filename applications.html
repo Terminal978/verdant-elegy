@@ -5,139 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - Заявки на администратора</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="gallery.html" class="auth-required">📸 Галерея</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
                 <a href="support.html" class="auth-required">Поддержка</a>
-                <a href="apply.html" class="auth-required">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать проект</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>Заявки на администратора</h1>
+            <p>Просмотр и управление заявками</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="admin-section">
-            <h2>⚡ Заявки на администратора</h2>
-            
             <div class="applications-controls">
                 <div class="applications-stats">
-                    <div class="stat-badge">
-                        <span class="stat-label">Всего заявок:</span>
-                        <span class="stat-value" id="total-applications">0</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-label">На рассмотрении:</span>
-                        <span class="stat-value pending" id="pending-applications">0</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-label">Одобрено:</span>
-                        <span class="stat-value approved" id="approved-applications">0</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-label">Отклонено:</span>
-                        <span class="stat-value rejected" id="rejected-applications">0</span>
-                    </div>
+                    <div class="stat-badge"><span class="stat-label">Всего заявок:</span><span class="stat-value" id="total-applications">0</span></div>
+                    <div class="stat-badge"><span class="stat-label">На рассмотрении:</span><span class="stat-value pending" id="pending-applications">0</span></div>
+                    <div class="stat-badge"><span class="stat-label">Одобрено:</span><span class="stat-value approved" id="approved-applications">0</span></div>
+                    <div class="stat-badge"><span class="stat-label">Отклонено:</span><span class="stat-value rejected" id="rejected-applications">0</span></div>
                 </div>
-                
                 <div class="applications-actions">
-                    <button class="toggle-status-btn" id="toggle-status-btn">
-                        <span id="status-text">🔴 Закрыть набор</span>
-                    </button>
+                    <button class="toggle-status-btn" id="toggle-status-btn"><span id="status-text">🔴 Закрыть набор</span></button>
                     <button class="filter-btn active" data-filter="all">Все</button>
                     <button class="filter-btn" data-filter="pending">На рассмотрении</button>
                     <button class="filter-btn" data-filter="approved">Одобрено</button>
                     <button class="filter-btn" data-filter="rejected">Отклонено</button>
-                    <button class="filter-btn" id="manual-import-btn" style="background: #e67e22; color: white; border: none;">📋 Добавить вручную</button>
+                    <button class="filter-btn" id="manual-import-btn" style="background:#e67e22;color:white;border:none;">📋 Добавить вручную</button>
                 </div>
             </div>
 
-            <!-- Форма ручного импорта -->
-            <div id="manual-import-form" style="display:none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 24px; margin-bottom: 24px;">
-                <h3 style="margin-top:0;">📋 Добавить заявку вручную (из Discord)</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div>
-                        <label>👤 Minecraft ник *</label>
-                        <input type="text" id="imp-nick" placeholder="Ник игрока" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
-                    </div>
-                    <div>
-                        <label>🎂 Возраст *</label>
-                        <input type="number" id="imp-age" placeholder="Возраст" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
-                    </div>
-                    <div>
-                        <label>💬 Discord *</label>
-                        <input type="text" id="imp-discord" placeholder="Discord тег" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
-                    </div>
-                    <div>
-                        <label>⏱️ Время на сервере</label>
-                        <input type="text" id="imp-playtime" placeholder="Например: 2 недели" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
-                    </div>
-                    <div>
-                        <label>📅 Активность в день</label>
-                        <input type="text" id="imp-hours" placeholder="Например: 3-4 часа" style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color);">
-                    </div>
+            <div id="manual-import-form" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:24px;">
+                <h3 style="margin-top:0;color:white;">📋 Добавить заявку вручную (из Discord)</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                    <div><label style="color:var(--text-muted);font-size:13px;">👤 Minecraft ник *</label><input type="text" id="imp-nick" placeholder="Ник игрока" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);"></div>
+                    <div><label style="color:var(--text-muted);font-size:13px;">🎂 Возраст *</label><input type="number" id="imp-age" placeholder="Возраст" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);"></div>
+                    <div><label style="color:var(--text-muted);font-size:13px;">💬 Discord *</label><input type="text" id="imp-discord" placeholder="Discord тег" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);"></div>
+                    <div><label style="color:var(--text-muted);font-size:13px;">⏱️ Время на сервере</label><input type="text" id="imp-playtime" placeholder="Например: 2 недели" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);"></div>
+                    <div><label style="color:var(--text-muted);font-size:13px;">📅 Активность в день</label><input type="text" id="imp-hours" placeholder="Например: 3-4 часа" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);"></div>
                 </div>
-                <div style="margin-top:12px;">
-                    <label>🎓 Опыт администрирования</label>
-                    <textarea id="imp-experience" rows="2" placeholder="Опыт..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
-                </div>
-                <div style="margin-top:12px;">
-                    <label>💡 Мотивация</label>
-                    <textarea id="imp-motivation" rows="2" placeholder="Мотивация..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
-                </div>
-                <div style="margin-top:12px;">
-                    <label>⚖️ Конфликтная ситуация</label>
-                    <textarea id="imp-conflict" rows="2" placeholder="Как бы поступил..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
-                </div>
-                <div style="margin-top:12px;">
-                    <label>📝 Дополнительно</label>
-                    <textarea id="imp-additional" rows="2" placeholder="Доп. информация..." style="width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-color); resize:vertical;"></textarea>
-                </div>
-                <div style="margin-top:16px; display:flex; gap:10px;">
-                    <button id="imp-save-btn" style="background:#27ae60; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px;">✅ Сохранить заявку</button>
-                    <button id="imp-cancel-btn" style="background:#e74c3c; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px;">✖ Отмена</button>
+                <div style="margin-top:12px;"><label style="color:var(--text-muted);font-size:13px;">🎓 Опыт администрирования</label><textarea id="imp-experience" rows="2" placeholder="Опыт..." style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);resize:vertical;"></textarea></div>
+                <div style="margin-top:12px;"><label style="color:var(--text-muted);font-size:13px;">💡 Мотивация</label><textarea id="imp-motivation" rows="2" placeholder="Мотивация..." style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);resize:vertical;"></textarea></div>
+                <div style="margin-top:12px;"><label style="color:var(--text-muted);font-size:13px;">⚖️ Конфликтная ситуация</label><textarea id="imp-conflict" rows="2" placeholder="Как бы поступил..." style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);resize:vertical;"></textarea></div>
+                <div style="margin-top:12px;"><label style="color:var(--text-muted);font-size:13px;">📝 Дополнительно</label><textarea id="imp-additional" rows="2" placeholder="Доп. информация..." style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);resize:vertical;"></textarea></div>
+                <div style="margin-top:16px;display:flex;gap:10px;">
+                    <button id="imp-save-btn" style="background:var(--green);color:#111;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:700;">✅ Сохранить заявку</button>
+                    <button id="imp-cancel-btn" style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;">✖ Отмена</button>
                 </div>
             </div>
 
-            <div class="applications-list" id="applications-list">
-                <!-- Заявки будут добавлены через JavaScript -->
-            </div>
-
-            <div class="no-applications" id="no-applications" style="display: none;">
-                <div style="font-size: 64px; margin-bottom: 20px;">📭</div>
+            <div class="applications-list" id="applications-list"></div>
+            <div class="no-applications" id="no-applications" style="display:none;">
+                <div style="font-size:64px;margin-bottom:20px;">📭</div>
                 <h3>Нет заявок</h3>
                 <p>Все заявки на администратора будут отображаться здесь</p>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="applications.js"></script>
 </body>

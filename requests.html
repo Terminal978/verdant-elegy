@@ -5,56 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - Запросы поддержки</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>Запросы поддержки</h1>
+            <p>Управление обращениями пользователей</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="admin-section">
-            <h2>📧 Запросы поддержки</h2>
-            
             <div class="requests-controls">
                 <div class="requests-stats">
-                    <div class="stat-badge">
-                        <span class="stat-label">Всего запросов:</span>
-                        <span class="stat-value" id="total-requests">0</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-label">Новые:</span>
-                        <span class="stat-value new" id="new-requests">0</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-label">Обработанные:</span>
-                        <span class="stat-value processed" id="processed-requests">0</span>
-                    </div>
+                    <div class="stat-badge"><span class="stat-label">Всего запросов:</span><span class="stat-value" id="total-requests">0</span></div>
+                    <div class="stat-badge"><span class="stat-label">Новые:</span><span class="stat-value" style="color:var(--green);" id="new-requests">0</span></div>
+                    <div class="stat-badge"><span class="stat-label">Обработанные:</span><span class="stat-value" id="processed-requests">0</span></div>
                 </div>
                 <div class="requests-actions">
                     <button class="filter-btn active" data-filter="all">Все</button>
@@ -63,25 +57,16 @@
                     <button class="clear-all-btn" id="clear-all-requests">🗑️ Очистить все</button>
                 </div>
             </div>
-
-            <div class="requests-list" id="requests-list">
-                <!-- Запросы будут добавлены через JavaScript -->
-            </div>
-
-            <div class="no-requests" id="no-requests" style="display: none;">
-                <div style="font-size: 64px; margin-bottom: 20px;">📭</div>
+            <div class="requests-list" id="requests-list"></div>
+            <div class="no-requests" id="no-requests" style="display:none;">
+                <div style="font-size:64px;margin-bottom:20px;">📭</div>
                 <h3>Нет запросов</h3>
                 <p>Все запросы поддержки будут отображаться здесь</p>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="requests.js"></script>
 </body>

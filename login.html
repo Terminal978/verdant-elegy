@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - Вход</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="support.html">Поддержка</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="team.html">Команда</a>
             </nav>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
+            <div class="header-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
+            </div>
         </div>
     </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Вход</h1>
+            <p>Войдите в аккаунт или зарегистрируйтесь</p>
+        </div>
+    </div>
 
     <main class="container">
         <section class="auth-section">
@@ -31,45 +35,35 @@
                     <button class="auth-tab active" data-tab="login">Вход</button>
                     <button class="auth-tab" data-tab="register">Регистрация</button>
                 </div>
-
-                <!-- Форма входа -->
                 <div id="login-form" class="auth-form active">
-                    <h2>Вход в аккаунт</h2>
+                    <h3>Вход в аккаунт</h3>
                     <form id="loginForm">
                         <input type="text" id="login-username" placeholder="Имя пользователя" required>
                         <div class="password-container">
                             <input type="password" id="login-password" placeholder="Пароль" required>
-                            <button type="button" class="toggle-password" data-target="login-password">
-                                <span class="eye-icon">👁️</span>
-                            </button>
+                            <button type="button" class="toggle-password" data-target="login-password"><span class="eye-icon">👁️</span></button>
                         </div>
                         <button type="submit">Войти</button>
                     </form>
                     <p class="auth-message" id="login-message"></p>
                 </div>
-
-                <!-- Форма регистрации -->
                 <div id="register-form" class="auth-form">
-                    <h2>Регистрация</h2>
+                    <h3>Регистрация</h3>
                     <form id="registerForm">
                         <input type="text" id="register-username" placeholder="Имя пользователя" required minlength="3">
                         <input type="email" id="register-email" placeholder="Email" required>
                         <button type="button" id="send-code-btn" class="send-code-btn">📧 Отправить код</button>
-                        <input type="text" id="register-code" placeholder="Код из email" required style="display: none;">
-                        <input type="text" id="register-minecraft" placeholder="Ник в Minecraft" required style="display: none;">
-                        <div class="password-container" style="display: none;" id="password-container-1">
+                        <input type="text" id="register-code" placeholder="Код из email" required style="display:none;">
+                        <input type="text" id="register-minecraft" placeholder="Ник в Minecraft" required style="display:none;">
+                        <div class="password-container" style="display:none;" id="password-container-1">
                             <input type="password" id="register-password" placeholder="Пароль" required minlength="6">
-                            <button type="button" class="toggle-password" data-target="register-password">
-                                <span class="eye-icon">👁️</span>
-                            </button>
+                            <button type="button" class="toggle-password" data-target="register-password"><span class="eye-icon">👁️</span></button>
                         </div>
-                        <div class="password-container" style="display: none;" id="password-container-2">
+                        <div class="password-container" style="display:none;" id="password-container-2">
                             <input type="password" id="register-confirm" placeholder="Подтвердите пароль" required>
-                            <button type="button" class="toggle-password" data-target="register-confirm">
-                                <span class="eye-icon">👁️</span>
-                            </button>
+                            <button type="button" class="toggle-password" data-target="register-confirm"><span class="eye-icon">👁️</span></button>
                         </div>
-                        <button type="submit" style="display: none;" id="register-submit-btn">Зарегистрироваться</button>
+                        <button type="submit" style="display:none;" id="register-submit-btn">Зарегистрироваться</button>
                     </form>
                     <p class="auth-message" id="register-message"></p>
                 </div>
@@ -77,12 +71,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="auth.js?v=3"></script>

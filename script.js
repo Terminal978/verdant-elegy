@@ -1,6 +1,7 @@
-// Minecraft частицы
+// Minecraft частицы (отключены)
 class MinecraftParticles {
     constructor() {
+        return; // отключено
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'particles-canvas';
         document.body.insertBefore(this.canvas, document.body.firstChild);
@@ -388,7 +389,7 @@ if (supportForm) {
         e.preventDefault();
         
         const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
+        const email = (document.getElementById('discord') || document.getElementById('email'))?.value || '';
         const category = document.getElementById('category').value;
         const message = document.getElementById('message').value;
         
@@ -505,6 +506,11 @@ function checkAuth() {
     const adminMenuLink = document.getElementById('admin-menu-link');
     const logoutBtn = document.getElementById('logout-btn');
     
+    // Скрываем защищённые ссылки для незалогиненных
+    document.querySelectorAll('.auth-required').forEach(el => {
+        el.style.display = currentUser ? '' : 'none';
+    });
+
     console.log('checkAuth called', { currentUser, loginLink, userMenuContainer });
     
     if (currentUser && loginLink && userMenuContainer) {

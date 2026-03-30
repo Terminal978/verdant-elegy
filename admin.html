@@ -3,194 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant Elegy - Панель администратора</title>
+    <title>Verdant Elegy - Админ панель</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html" class="auth-required">📸 Галерея</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
                 <a href="support.html" class="auth-required">Поддержка</a>
-                <a href="apply.html" class="auth-required">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать проект</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="requests.html">📧 Запросы поддержки</a>
-                        <a href="applications.html">⚡ Заявки на админа</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="requests.html">📧 Запросы поддержки</a>
+                            <a href="applications.html">⚡ Заявки на админа</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>Панель администратора</h1>
+            <p>Управление сервером и пользователями</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="admin-section">
-            <h2>⚙️ Панель администратора</h2>
-            
             <div class="admin-grid">
-                <!-- Статистика -->
                 <div class="admin-card">
                     <h3>📊 Статистика</h3>
-                    <div class="stat-item">
-                        <span>Зарегистрировано пользователей:</span>
-                        <strong id="total-users">0</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Администраторов:</span>
-                        <strong id="total-admins">0</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Обычных пользователей:</span>
-                        <strong id="total-regular">0</strong>
-                    </div>
+                    <div class="stat-item"><span>Зарегистрировано пользователей:</span><strong id="total-users">0</strong></div>
+                    <div class="stat-item"><span>Администраторов:</span><strong id="total-admins">0</strong></div>
+                    <div class="stat-item"><span>Обычных пользователей:</span><strong id="total-regular">0</strong></div>
                 </div>
 
-                <!-- Управление пользователями -->
-                <div class="admin-card full-width">
-                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px; position: relative;">
-                        <h3 style="margin: 0;">👥 Управление пользователями</h3>
-                        <button class="refresh-icon-btn" id="refresh-users-btn" title="Обновить список" style="position: absolute; right: 0;">🔄</button>
-                    </div>
-                    <div class="users-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Имя пользователя</th>
-                                    <th>Email</th>
-                                    <th>Minecraft ник</th>
-                                    <th>Роль</th>
-                                    <th>Действия</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-list">
-                                <!-- Список пользователей -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Настройки сервера -->
                 <div class="admin-card">
                     <h3>🎮 Информация о сервере</h3>
                     <div class="server-info-admin">
                         <p><strong>IP:</strong> 213.152.43.61:25775</p>
-                        <p><strong>Версия:</strong> 1.16.5</p>
+                        <p><strong>Версия:</strong> 1.20.2</p>
                         <p><strong>Статус:</strong> <span id="admin-server-status">Проверка...</span></p>
                     </div>
                 </div>
 
-                <!-- Быстрые действия -->
                 <div class="admin-card">
                     <h3>⚡ Быстрые действия</h3>
                     <button class="admin-action-btn" id="check-applications-btn">⚡ Заявки на администратора</button>
                     <button class="admin-action-btn" id="check-support-btn">📧 Проверить запросы</button>
-                    <button class="admin-action-btn" id="edit-about-btn">📖 Редактировать "О нас"</button>
+                    <button class="admin-action-btn" id="edit-about-btn">📖 Редактировать «О нас»</button>
                     <button class="admin-action-btn" id="edit-team-btn">👥 Редактировать команду</button>
                     <button class="admin-action-btn" id="reset-team-btn">🔄 Сбросить команду</button>
                     <button class="admin-action-btn" id="edit-rules-btn">📜 Редактировать правила</button>
-                    <button class="admin-action-btn" id="clear-users-btn">🗑️ Очистить пользователей</button>
+                    <button class="admin-action-btn" id="clear-users-btn" style="color:#e74c3c;border-color:rgba(231,76,60,0.3);">🗑️ Очистить пользователей</button>
                 </div>
-                
-                <!-- Редактор страницы "О нас" -->
-                <div class="admin-card full-width" id="about-editor" style="display: none;">
-                    <h3>📖 Редактор страницы "О нас"</h3>
-                    <div class="editor-info">
-                        <p>Используйте HTML для форматирования текста. Доступные теги: h3, p, ul, li, strong, em</p>
+
+                <div class="admin-card full-width">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                        <h3 style="margin:0;">👥 Управление пользователями</h3>
+                        <button class="refresh-icon-btn" id="refresh-users-btn" title="Обновить">🔄</button>
                     </div>
-                    <textarea id="about-editor-textarea" rows="15" style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-color); font-family: monospace; font-size: 14px; resize: vertical;"></textarea>
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button class="admin-action-btn" id="save-about-btn" style="flex: 1;">💾 Сохранить</button>
-                        <button class="admin-action-btn" id="preview-about-btn" style="flex: 1; background: #3498db;">👁️ Предпросмотр</button>
-                        <button class="admin-action-btn" id="cancel-about-btn" style="flex: 1; background: #95a5a6;">❌ Отмена</button>
+                    <div class="users-table">
+                        <table>
+                            <thead><tr><th>Имя пользователя</th><th>Email</th><th>Minecraft ник</th><th>Роль</th><th>Действия</th></tr></thead>
+                            <tbody id="users-list"></tbody>
+                        </table>
                     </div>
-                    <div id="about-preview" style="display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 8px;">
-                        <h4>Предпросмотр:</h4>
+                </div>
+
+                <div class="admin-card full-width" id="about-editor" style="display:none;">
+                    <h3>📖 Редактор «О нас»</h3>
+                    <div class="editor-info"><p>Используйте HTML для форматирования. Доступные теги: h3, p, ul, li, strong, em</p></div>
+                    <textarea id="about-editor-textarea" class="editor-textarea" rows="15"></textarea>
+                    <div class="editor-actions">
+                        <button class="admin-action-btn" id="save-about-btn">💾 Сохранить</button>
+                        <button class="admin-action-btn" id="preview-about-btn" style="color:#3498db;border-color:rgba(52,152,219,0.3);">👁️ Предпросмотр</button>
+                        <button class="admin-action-btn" id="cancel-about-btn" style="color:var(--text-muted);">❌ Отмена</button>
+                    </div>
+                    <div id="about-preview" style="display:none;margin-top:20px;padding:20px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);">
+                        <h4 style="color:var(--text-muted);margin-bottom:12px;">Предпросмотр:</h4>
                         <div id="about-preview-content"></div>
                     </div>
                 </div>
-                
-                <!-- Редактор команды -->
-                <div class="admin-card full-width" id="team-editor" style="display: none;">
-                    <h3>👥 Редактор состава команды</h3>
-                    <div class="editor-info">
-                        <p>Используйте панель инструментов для форматирования текста. Выделите текст и нажмите на кнопку.</p>
-                        <p><strong>Быстрые действия:</strong> 👤 Добавить члена | 📁 Добавить категорию | 📝 Вступление | ⚡ Призыв к действию</p>
-                    </div>
-                    
-                    <!-- Панель инструментов -->
+
+                <div class="admin-card full-width" id="team-editor" style="display:none;">
+                    <h3>👥 Редактор команды</h3>
+                    <div class="editor-info"><p><strong>Быстрые действия:</strong> 👤 Добавить члена | 📁 Добавить категорию | 📝 Вступление | ⚡ Призыв к действию</p></div>
                     <div class="editor-toolbar">
-                        <button type="button" class="toolbar-btn" onclick="formatTeamText('bold')" title="Жирный"><strong>B</strong></button>
-                        <button type="button" class="toolbar-btn" onclick="formatTeamText('italic')" title="Курсив"><em>I</em></button>
-                        <button type="button" class="toolbar-btn" onclick="formatTeamText('underline')" title="Подчеркнутый"><u>U</u></button>
+                        <button type="button" class="toolbar-btn" onclick="formatTeamText('bold')"><strong>B</strong></button>
+                        <button type="button" class="toolbar-btn" onclick="formatTeamText('italic')"><em>I</em></button>
+                        <button type="button" class="toolbar-btn" onclick="formatTeamText('underline')"><u>U</u></button>
                         <span class="toolbar-separator">|</span>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamHeading()" title="Заголовок категории">H3</button>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamMember()" title="Добавить члена команды">👤</button>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamCategory()" title="Добавить категорию">📁</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamHeading()">H3</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamMember()">👤</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamCategory()">📁</button>
                         <span class="toolbar-separator">|</span>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamIntro()" title="Вступление">📝</button>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamJoin()" title="Блок призыва">⚡</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamIntro()">📝</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamJoin()">⚡</button>
                         <span class="toolbar-separator">|</span>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamDivider()" title="Разделитель">—</button>
-                        <button type="button" class="toolbar-btn" onclick="insertTeamBreak()" title="Перенос строки">↵</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamDivider()">—</button>
+                        <button type="button" class="toolbar-btn" onclick="insertTeamBreak()">↵</button>
                     </div>
-                    
-                    <textarea id="team-editor-textarea" rows="20" style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-color); font-family: monospace; font-size: 14px; resize: vertical;"></textarea>
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button class="admin-action-btn" id="save-team-btn" style="flex: 1;">💾 Сохранить</button>
-                        <button class="admin-action-btn" id="preview-team-btn" style="flex: 1; background: #3498db;">👁️ Предпросмотр</button>
-                        <button class="admin-action-btn" id="cancel-team-btn" style="flex: 1; background: #95a5a6;">❌ Отмена</button>
+                    <textarea id="team-editor-textarea" class="editor-textarea" rows="20"></textarea>
+                    <div class="editor-actions">
+                        <button class="admin-action-btn" id="save-team-btn">💾 Сохранить</button>
+                        <button class="admin-action-btn" id="preview-team-btn" style="color:#3498db;border-color:rgba(52,152,219,0.3);">👁️ Предпросмотр</button>
+                        <button class="admin-action-btn" id="cancel-team-btn" style="color:var(--text-muted);">❌ Отмена</button>
                     </div>
-                    <div id="team-preview" style="display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 8px; max-height: 500px; overflow-y: auto;">
-                        <h4>Предпросмотр:</h4>
+                    <div id="team-preview" style="display:none;margin-top:20px;padding:20px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);max-height:500px;overflow-y:auto;">
+                        <h4 style="color:var(--text-muted);margin-bottom:12px;">Предпросмотр:</h4>
                         <div id="team-preview-content"></div>
                     </div>
                 </div>
-                
-                <!-- Редактор правил сервера -->
-                <div class="admin-card full-width" id="rules-editor" style="display: none;">
-                    <h3>📜 Редактор правил сервера</h3>
-                    <div class="editor-info">
-                        <p>Используйте панель инструментов для форматирования текста. Выделите текст и нажмите на кнопку.</p>
-                    </div>
-                    
-                    <!-- Панель инструментов -->
+
+                <div class="admin-card full-width" id="rules-editor" style="display:none;">
+                    <h3>📜 Редактор правил</h3>
+                    <div class="editor-info"><p>Используйте панель инструментов для форматирования текста.</p></div>
                     <div class="editor-toolbar">
-                        <button type="button" class="toolbar-btn" onclick="formatText('bold')" title="Жирный"><strong>B</strong></button>
-                        <button type="button" class="toolbar-btn" onclick="formatText('italic')" title="Курсив"><em>I</em></button>
-                        <button type="button" class="toolbar-btn" onclick="formatText('underline')" title="Подчеркнутый"><u>U</u></button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('bold')"><strong>B</strong></button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('italic')"><em>I</em></button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('underline')"><u>U</u></button>
                         <span class="toolbar-separator">|</span>
-                        <button type="button" class="toolbar-btn" onclick="insertHeading()" title="Заголовок">H3</button>
-                        <button type="button" class="toolbar-btn" onclick="insertRule()" title="Добавить правило">📝</button>
-                        <button type="button" class="toolbar-btn" onclick="insertCategory()" title="Добавить категорию">📁</button>
+                        <button type="button" class="toolbar-btn" onclick="insertHeading()">H3</button>
+                        <button type="button" class="toolbar-btn" onclick="insertRule()">📝</button>
+                        <button type="button" class="toolbar-btn" onclick="insertCategory()">📁</button>
                         <span class="toolbar-separator">|</span>
-                        <button type="button" class="toolbar-btn" onclick="insertDivider()" title="Разделитель">—</button>
-                        <button type="button" class="toolbar-btn" onclick="insertBreak()" title="Перенос строки">↵</button>
+                        <button type="button" class="toolbar-btn" onclick="insertDivider()">—</button>
+                        <button type="button" class="toolbar-btn" onclick="insertBreak()">↵</button>
                     </div>
-                    
-                    <textarea id="rules-editor-textarea" rows="20" style="width: 100%; padding: 15px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-color); font-family: monospace; font-size: 14px; resize: vertical;"></textarea>
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button class="admin-action-btn" id="save-rules-btn" style="flex: 1;">💾 Сохранить</button>
-                        <button class="admin-action-btn" id="preview-rules-btn" style="flex: 1; background: #3498db;">👁️ Предпросмотр</button>
-                        <button class="admin-action-btn" id="cancel-rules-btn" style="flex: 1; background: #95a5a6;">❌ Отмена</button>
+                    <textarea id="rules-editor-textarea" class="editor-textarea" rows="20"></textarea>
+                    <div class="editor-actions">
+                        <button class="admin-action-btn" id="save-rules-btn">💾 Сохранить</button>
+                        <button class="admin-action-btn" id="preview-rules-btn" style="color:#3498db;border-color:rgba(52,152,219,0.3);">👁️ Предпросмотр</button>
+                        <button class="admin-action-btn" id="cancel-rules-btn" style="color:var(--text-muted);">❌ Отмена</button>
                     </div>
-                    <div id="rules-preview" style="display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 8px; max-height: 500px; overflow-y: auto;">
-                        <h4>Предпросмотр:</h4>
+                    <div id="rules-preview" style="display:none;margin-top:20px;padding:20px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);max-height:500px;overflow-y:auto;">
+                        <h4 style="color:var(--text-muted);margin-bottom:12px;">Предпросмотр:</h4>
                         <div id="rules-preview-content"></div>
                     </div>
                 </div>
@@ -198,12 +162,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="admin.js"></script>
 </body>

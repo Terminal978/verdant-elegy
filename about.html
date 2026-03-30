@@ -5,59 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - О нас</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu" id="user-menu-container" style="display: none;">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu" id="user-menu-container" style="display: none;">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <a href="login.html" id="login-link" class="login-btn">🔐 Вход</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <a href="login.html" id="login-link" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; white-space: nowrap; text-decoration: none; color: white;">🔐 Вход</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>О нас</h1>
+            <p>Узнайте больше о сервере Verdant Elegy</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="about-section">
-            <h2>📖 О нас</h2>
             <div class="about-content" id="about-content">
                 <div class="about-block">
                     <h3>🎮 Наш сервер</h3>
-                    <p>Verdant Elegy - это уютный Minecraft сервер, где каждый игрок может найти что-то для себя. Мы создали дружелюбное сообщество, где ценятся взаимопомощь и креативность.</p>
+                    <p>Verdant Elegy — это уютный Minecraft сервер, где каждый игрок может найти что-то для себя. Мы создали дружелюбное сообщество, где ценятся взаимопомощь и креативность.</p>
                 </div>
-
                 <div class="about-block">
                     <h3>🌟 Наша миссия</h3>
-                    <p>Мы стремимся создать лучший игровой опыт для всех наших игроков. Наша цель - построить сообщество, где каждый чувствует себя как дома.</p>
+                    <p>Мы стремимся создать лучший игровой опыт для всех наших игроков. Наша цель — построить сообщество, где каждый чувствует себя как дома.</p>
                 </div>
-
                 <div class="about-block">
                     <h3>👥 Команда</h3>
                     <p>Наша команда администраторов работает круглосуточно, чтобы обеспечить комфортную игру. Мы всегда готовы помочь и ответить на ваши вопросы.</p>
                 </div>
-
                 <div class="about-block">
                     <h3>🎯 Особенности</h3>
                     <ul>
@@ -72,12 +73,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="about.js"></script>
 </body>

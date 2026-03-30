@@ -3,118 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant Elegy - Заявка на администратора</title>
+    <title>Verdant Elegy - Стать админом</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu" id="user-menu-container" style="display: none;">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu" id="user-menu-container" style="display: none;">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <a href="login.html" id="login-link" class="login-btn">🔐 Вход</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <a href="login.html" id="login-link" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; white-space: nowrap; text-decoration: none; color: white;">🔐 Вход</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Стать администратором</h1>
+            <p>Заполни анкету и стань частью команды</p>
+        </div>
+    </div>
 
     <main class="container">
         <section class="apply-section">
             <div class="apply-header">
-                <h2>⚡ Заявка на администратора</h2>
                 <div class="apply-status" id="apply-status">
                     <span class="status-badge open">🟢 Набор открыт</span>
                 </div>
             </div>
-
             <div class="apply-info">
                 <h3>📋 Требования к кандидатам:</h3>
                 <ul>
                     <li>Возраст от 14 лет</li>
-                    <li>Быть граммотным</li>
+                    <li>Быть грамотным</li>
                     <li>Активность минимум 3 часа в день</li>
                     <li>Знание правил сервера</li>
                     <li>Адекватность и стрессоустойчивость</li>
                     <li>Наличие Discord и микрофона</li>
                 </ul>
             </div>
-
             <div class="apply-form-container" id="apply-form-container">
                 <form id="applyForm" class="apply-form">
-                    <h3>Заполните анкету:</h3>
-                    
-                    <label>
-                        <span>Ваш ник в Minecraft: *</span>
-                        <input type="text" id="minecraft-nick" required>
-                    </label>
-
-                    <label>
-                        <span>Возраст: *</span>
-                        <input type="number" id="age" min="14" max="99" required>
-                    </label>
-
-                    <label>
-                        <span>Discord: *</span>
-                        <input type="text" id="discord" placeholder="username#0000" required>
-                    </label>
-
-                    <label>
-                        <span>Сколько времени играете на сервере? *</span>
-                        <input type="text" id="play-time" placeholder="Например: 2 месяца" required>
-                    </label>
-
-                    <label>
-                        <span>Сколько часов в день можете уделять серверу? *</span>
-                        <input type="text" id="daily-hours" placeholder="Например: 4-5 часов" required>
-                    </label>
-
-                    <label>
-                        <span>Был ли у вас опыт администрирования? *</span>
-                        <textarea id="admin-experience" rows="3" placeholder="Опишите ваш опыт или напишите 'Нет'" required></textarea>
-                    </label>
-
-                    <label>
-                        <span>Почему вы хотите стать администратором? *</span>
-                        <textarea id="motivation" rows="4" placeholder="Расскажите о своей мотивации" required></textarea>
-                    </label>
-
-                    <label>
-                        <span>Как вы поступите в конфликтной ситуации? *</span>
-                        <textarea id="conflict-situation" rows="4" placeholder="Опишите ваши действия" required></textarea>
-                    </label>
-
-                    <label>
-                        <span>Дополнительная информация:</span>
-                        <textarea id="additional-info" rows="3" placeholder="Что еще вы хотите рассказать о себе?"></textarea>
-                    </label>
-
+                    <label><span>Ваш ник в Minecraft: *</span><input type="text" id="minecraft-nick" required></label>
+                    <label><span>Возраст: *</span><input type="number" id="age" min="14" max="99" required></label>
+                    <label><span>Discord: *</span><input type="text" id="discord" placeholder="username" required></label>
+                    <label><span>Сколько времени играете на сервере? *</span><input type="text" id="play-time" placeholder="Например: 2 месяца" required></label>
+                    <label><span>Сколько часов в день можете уделять серверу? *</span><input type="text" id="daily-hours" placeholder="Например: 4-5 часов" required></label>
+                    <label><span>Был ли у вас опыт администрирования? *</span><textarea id="admin-experience" rows="3" placeholder="Опишите ваш опыт или напишите «Нет»" required></textarea></label>
+                    <label><span>Почему вы хотите стать администратором? *</span><textarea id="motivation" rows="4" placeholder="Расскажите о своей мотивации" required></textarea></label>
+                    <label><span>Как вы поступите в конфликтной ситуации? *</span><textarea id="conflict-situation" rows="4" placeholder="Опишите ваши действия" required></textarea></label>
+                    <label><span>Дополнительная информация:</span><textarea id="additional-info" rows="3" placeholder="Что ещё вы хотите рассказать о себе?"></textarea></label>
                     <button type="submit" class="submit-btn">📨 Отправить заявку</button>
                 </form>
             </div>
-
-            <div class="apply-closed" id="apply-closed" style="display: none;">
-                <div style="font-size: 64px; margin-bottom: 20px;">🔒</div>
+            <div class="apply-closed" id="apply-closed" style="display:none;">
+                <div style="font-size:64px;margin-bottom:20px;">🔒</div>
                 <h3>Набор закрыт</h3>
                 <p>В данный момент мы не принимаем заявки на администратора.</p>
                 <p>Следите за новостями в нашем Discord сервере!</p>
@@ -122,12 +85,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="apply.js?v=3"></script>
 </body>

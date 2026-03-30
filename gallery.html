@@ -5,150 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - Галерея</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu" id="user-menu-container" style="display: none;">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu" id="user-menu-container" style="display: none;">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <a href="login.html" id="login-link" class="login-btn">🔐 Вход</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <a href="login.html" id="login-link" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; white-space: nowrap; text-decoration: none; color: white;">🔐 Вход</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>Галерея</h1>
+            <p>Лучшие моменты и постройки на нашем сервере</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="gallery-section">
-            <h2>📸 Галерея сервера</h2>
-            <p class="gallery-intro">Лучшие моменты и постройки на нашем сервере</p>
-
-            <!-- Кнопка добавления для всех пользователей -->
             <div class="user-controls" id="user-controls">
-                <button class="admin-action-btn" id="add-photo-btn">📷 Добавить фото</button>
+                <button class="admin-action-btn" id="add-photo-btn" style="width:auto; display:inline-block;">📷 Добавить фото</button>
             </div>
-
-            <!-- Форма добавления изображения -->
             <div class="gallery-editor" id="gallery-editor" style="display: none;">
                 <h3 id="editor-title">Добавить изображение</h3>
                 <form id="gallery-form">
                     <input type="hidden" id="edit-index" value="">
-                    
-                    <!-- Поля для URL изображений -->
                     <div id="image-urls-container">
-                        <label>
-                            <span>URL изображения 1: <span style="color: red; margin-left: 2px;">*</span></span>
-                            <input type="url" class="image-url-input" id="image-url-1" required placeholder="https://example.com/image1.jpg">
-                        </label>
-                        <label id="url-2-container" style="display: none;">
-                            <span>URL изображения 2:</span>
-                            <input type="url" class="image-url-input" id="image-url-2" placeholder="https://example.com/image2.jpg">
-                        </label>
-                        <label id="url-3-container" style="display: none;">
-                            <span>URL изображения 3:</span>
-                            <input type="url" class="image-url-input" id="image-url-3" placeholder="https://example.com/image3.jpg">
-                        </label>
-                        <label id="url-4-container" style="display: none;">
-                            <span>URL изображения 4:</span>
-                            <input type="url" class="image-url-input" id="image-url-4" placeholder="https://example.com/image4.jpg">
-                        </label>
-                        <label id="url-5-container" style="display: none;">
-                            <span>URL изображения 5:</span>
-                            <input type="url" class="image-url-input" id="image-url-5" placeholder="https://example.com/image5.jpg">
-                        </label>
+                        <label><span>URL изображения 1: <span style="color:#e74c3c">*</span></span><input type="url" class="image-url-input" id="image-url-1" required placeholder="https://example.com/image.jpg"></label>
+                        <label id="url-2-container" style="display:none;"><span>URL изображения 2:</span><input type="url" class="image-url-input" id="image-url-2" placeholder="https://example.com/image2.jpg"></label>
+                        <label id="url-3-container" style="display:none;"><span>URL изображения 3:</span><input type="url" class="image-url-input" id="image-url-3" placeholder="https://example.com/image3.jpg"></label>
+                        <label id="url-4-container" style="display:none;"><span>URL изображения 4:</span><input type="url" class="image-url-input" id="image-url-4" placeholder="https://example.com/image4.jpg"></label>
+                        <label id="url-5-container" style="display:none;"><span>URL изображения 5:</span><input type="url" class="image-url-input" id="image-url-5" placeholder="https://example.com/image5.jpg"></label>
                     </div>
-                    
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <button type="button" class="add-url-btn" id="add-url-btn">➕ Добавить еще фото</button>
-                        <button type="button" class="remove-url-btn" id="remove-url-btn" style="display: none;">➖ Убрать последнее</button>
+                    <div style="display:flex;gap:10px;margin-bottom:16px;">
+                        <button type="button" class="add-url-btn" id="add-url-btn">➕ Добавить ещё фото</button>
+                        <button type="button" class="remove-url-btn" id="remove-url-btn" style="display:none;">➖ Убрать последнее</button>
                     </div>
-                    
-                    <small style="color: #999; display: block; margin-bottom: 15px;">Вставьте прямые ссылки на изображения (Imgur, Discord CDN и т.д.). Можно добавить до 5 фото.</small>
-                    
-                    <label>
-                        <span>Название: <span style="color: red; margin-left: 2px;">*</span></span>
-                        <input type="text" id="image-title" required placeholder="Красивая постройка">
-                    </label>
-                    <label>
-                        <span>Описание (необязательно):</span>
-                        <textarea id="image-description" rows="3" placeholder="Описание постройки или момента"></textarea>
-                    </label>
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button type="submit" class="admin-action-btn" id="submit-btn" style="flex: 1;">💾 Добавить</button>
-                        <button type="button" class="admin-action-btn" id="cancel-gallery-btn" style="flex: 1; background: #95a5a6;">❌ Отмена</button>
+                    <label><span>Название: <span style="color:#e74c3c">*</span></span><input type="text" id="image-title" required placeholder="Красивая постройка"></label>
+                    <label><span>Описание (необязательно):</span><textarea id="image-description" rows="3" placeholder="Описание постройки или момента"></textarea></label>
+                    <div style="display:flex;gap:10px;margin-top:12px;">
+                        <button type="submit" class="hero-btn-primary" id="submit-btn" style="flex:1;">💾 Добавить</button>
+                        <button type="button" id="cancel-gallery-btn" class="hero-btn-secondary" style="flex:1;">❌ Отмена</button>
                     </div>
                 </form>
             </div>
-
-            <!-- Сетка галереи -->
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- Заполняется JavaScript -->
-            </div>
-
-            <!-- Пустая галерея -->
-            <div class="empty-gallery" id="empty-gallery" style="display: none;">
-                <div style="font-size: 64px; margin-bottom: 20px;">📷</div>
+            <div class="gallery-grid" id="gallery-grid"></div>
+            <div class="empty-gallery" id="empty-gallery" style="display:none;">
+                <div style="font-size:64px;margin-bottom:20px;">📷</div>
                 <h3>Галерея пуста</h3>
                 <p>Авторизованные пользователи могут добавить изображения</p>
             </div>
         </section>
     </main>
 
-    <!-- Модальное окно для просмотра изображения -->
     <div class="gallery-modal" id="gallery-modal">
         <div class="gallery-modal-content">
             <span class="gallery-modal-close" id="modal-close">&times;</span>
-            
-            <!-- Слайдер изображений -->
             <div class="gallery-slider">
-                <button class="slider-btn prev-btn" id="prev-btn" style="display: none;">‹</button>
+                <button class="slider-btn prev-btn" id="prev-btn" style="display:none;">‹</button>
                 <img src="" alt="" id="modal-image">
-                <button class="slider-btn next-btn" id="next-btn" style="display: none;">›</button>
+                <button class="slider-btn next-btn" id="next-btn" style="display:none;">›</button>
             </div>
-            
-            <!-- Индикаторы слайдов -->
             <div class="slider-indicators" id="slider-indicators"></div>
-            
             <div class="gallery-modal-info">
                 <h3 id="modal-title"></h3>
                 <p id="modal-description"></p>
                 <p id="modal-author"></p>
-                <p id="modal-date" style="color: #999; font-size: 14px;"></p>
+                <p id="modal-date" style="color:var(--text-muted);font-size:13px;"></p>
             </div>
-            <div class="gallery-modal-actions" id="modal-actions" style="display: none;">
+            <div class="gallery-modal-actions" id="modal-actions" style="display:none;">
                 <button class="edit-image-btn" id="edit-image-btn">✏️ Редактировать</button>
                 <button class="delete-image-btn" id="delete-image-btn">🗑️ Удалить</button>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js?v=2"></script>
     <script src="gallery.js?v=2"></script>
 </body>

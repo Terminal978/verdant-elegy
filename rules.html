@@ -5,196 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verdant Elegy - Правила</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" style="text-decoration: none; color: white;"><h1>🎮 Verdant Elegy</h1></a>
+            <a href="index.html" class="logo"><img src="favicon.svg" alt="" width="20" height="20">VERDANT ELEGY</a>
             <nav>
-                <a href="rules.html">Правила</a>
                 <a href="about.html">О нас</a>
-                <a href="team.html">👥 Команда</a>
-                <a href="gallery.html">📸 Галерея</a>
-                <a href="support.html">Поддержка</a>
-                <a href="apply.html">⚡ Стать админом</a>
-                <a href="https://verdantelegy.trademc.org/" target="_blank">Поддержать проект</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html" class="auth-required">Галерея</a>
+                <a href="support.html" class="auth-required">Поддержка</a>
+                <a href="apply.html" class="auth-required">Стать админом</a>
+                <a href="https://verdantelegy.trademc.org/" target="_blank" class="auth-required">Поддержать</a>
             </nav>
-            <div class="user-menu" id="user-menu-container" style="display: none;">
-                <div class="user-menu-dropdown">
-                    <div class="user-menu-toggle" id="user-menu-toggle">
-                        <span id="username-display"></span>
-                        <span>▼</span>
-                    </div>
-                    <div class="user-menu-content" id="user-menu-content">
-                        <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
-                        <button id="logout-btn" class="logout-btn">Выйти</button>
+            <div class="header-right">
+                <div class="user-menu" id="user-menu-container" style="display: none;">
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-toggle" id="user-menu-toggle">
+                            <span id="username-display"></span><span>▼</span>
+                        </div>
+                        <div class="user-menu-content" id="user-menu-content">
+                            <a href="admin.html" class="admin-link" id="admin-menu-link" style="display: none;">⚙️ Админ панель</a>
+                            <button id="logout-btn" class="logout-btn">Выйти</button>
+                        </div>
                     </div>
                 </div>
+                <a href="login.html" id="login-link" class="login-btn">🔐 Вход</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="theme-toggle-slider"></span></button>
             </div>
-            <a href="login.html" id="login-link" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 5px; white-space: nowrap; text-decoration: none; color: white;">🔐 Вход</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                <span class="theme-toggle-slider"></span>
-            </button>
         </div>
     </header>
 
+    <div class="page-hero">
+        <div class="container">
+            <h1>Правила сервера</h1>
+            <p>Соблюдение правил обязательно для всех игроков</p>
+        </div>
+    </div>
+
     <main class="container">
         <section class="rules-section">
-            <h2>🎈 Правила сервера 🎈</h2>
-            <p class="rules-intro">Соблюдение правил обязательно для всех игроков. Незнание правил не освобождает от ответственности.</p>
-
             <div id="rules-content">
             <div class="rule-category">
-                <h3>1. Общение</h3>
-                <div class="rule-item">
-                    <span class="rule-number">1.1</span>
-                    <div class="rule-content">
-                        <p>Использование, хранение, наличие активных / замороженных подписок на читы и прочее ПО, которое предоставляет преимущество над другими пользователями сервера менее чем 14 дней назад включительно. Если запрещенное ПО не было удалено, дата последнего использования не имеет значения, за исключением остальных файлов.</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">1.2</span>
-                    <div class="rule-content">
-                        <p>Осуществление обхода банов, мутов любыми средствами запрещено -бан / мут на аккаунт с предыдущей блокировкой и на тот, с помощью которого осуществлялся обход блокировки, сроком, превышающим в два раза предыдущую блокировку.</p>
-                        <p><em>При попытке обойти бан за использование / хранение читов или мут / гаг в третий раз — бан на 60 дней на все аккаунты игрока.</em></p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">1.3</span>
-                    <div class="rule-content">
-                        <p>Использование любых багов на сервере для получения преимущества над другими игроками, а также багов, мешающих работе сервера - бан на 1-2 часа (без предупреждения)</p>
-                    </div>
-                </div>
+                <h3>1. Читы и запрещённое ПО</h3>
+                <div class="rule-item"><span class="rule-number">1.1</span><div class="rule-content"><p>Использование, хранение, наличие активных / замороженных подписок на читы и прочее ПО, которое предоставляет преимущество над другими пользователями сервера менее чем 14 дней назад включительно.</p></div></div>
+                <div class="rule-item"><span class="rule-number">1.2</span><div class="rule-content"><p>Осуществление обхода банов, мутов любыми средствами запрещено — бан / мут на аккаунт с предыдущей блокировкой и на тот, с помощью которого осуществлялся обход блокировки, сроком, превышающим в два раза предыдущую блокировку.</p></div></div>
+                <div class="rule-item"><span class="rule-number">1.3</span><div class="rule-content"><p>Использование любых багов на сервере для получения преимущества над другими игроками — бан на 1-2 часа (без предупреждения)</p></div></div>
             </div>
-
             <div class="rule-category">
                 <h3>2. Общение</h3>
-                <div class="rule-item">
-                    <span class="rule-number">2.1</span>
-                    <div class="rule-content">
-                        <p>Оскорбление родных, а также любое их упоминание в негативном ключе - мут на 8 часов (без предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.2</span>
-                    <div class="rule-content">
-                        <p>Буллинг и угрозы в адрес конкретного игрока в голосовом либо текстовом чате сервера - мут от 1-3 часов (после предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.3</span>
-                    <div class="rule-content">
-                        <p>Конфликты на почве политики, религии, расы, ориентации- мут на 3 часа (без предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.4</span>
-                    <div class="rule-content">
-                        <p>Пропаганда нацизма, терроризма, проповедование их идей, использование их символики -бан на 5 дней (без предупреждение)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.5</span>
-                    <div class="rule-content">
-                        <p>Негрубое оскорбление проекта или администрации либо проявление неуважения - мут на 8 часов (без предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.6</span>
-                    <div class="rule-content">
-                        <p>Грубое оскорбление проекта или администрации - бан на 1 день (без предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">2.7</span>
-                    <div class="rule-content">
-                        <p>Спам (от 5 сообщений за короткое время)- мут на 1 час (без предупреждения)</p>
-                    </div>
-                </div>
+                <div class="rule-item"><span class="rule-number">2.1</span><div class="rule-content"><p>Оскорбление родных, а также любое их упоминание в негативном ключе — мут на 8 часов (без предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.2</span><div class="rule-content"><p>Буллинг и угрозы в адрес конкретного игрока — мут от 1-3 часов (после предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.3</span><div class="rule-content"><p>Конфликты на почве политики, религии, расы, ориентации — мут на 3 часа (без предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.4</span><div class="rule-content"><p>Пропаганда нацизма, терроризма — бан на 5 дней (без предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.5</span><div class="rule-content"><p>Негрубое оскорбление проекта или администрации — мут на 8 часов (без предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.6</span><div class="rule-content"><p>Грубое оскорбление проекта или администрации — бан на 1 день (без предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">2.7</span><div class="rule-content"><p>Спам (от 5 сообщений за короткое время) — мут на 1 час (без предупреждения)</p></div></div>
             </div>
-
             <div class="rule-category">
                 <h3>3. Ники</h3>
-                <div class="rule-item">
-                    <span class="rule-number">3.1</span>
-                    <div class="rule-content">
-                        <p>Запрещено ставить никнеймы с использованием невидимых либо трудночитаемых символов - бан на 1 час (после предупреждения)</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">3.2</span>
-                    <div class="rule-content">
-                        <p>Реклама запрещенного ПО через никнейм- бан на 3 дня ( без предупреждения)</p>
-                    </div>
-                </div>
+                <div class="rule-item"><span class="rule-number">3.1</span><div class="rule-content"><p>Запрещено ставить никнеймы с использованием невидимых либо трудночитаемых символов — бан на 1 час (после предупреждения)</p></div></div>
+                <div class="rule-item"><span class="rule-number">3.2</span><div class="rule-content"><p>Реклама запрещённого ПО через никнейм — бан на 3 дня (без предупреждения)</p></div></div>
             </div>
-
             <div class="rule-category">
                 <h3>4. Прочее</h3>
-                <div class="rule-item">
-                    <span class="rule-number">4.1</span>
-                    <div class="rule-content">
-                        <p>Игрок может быть занесен в черный список проекта (ЧСП) за особо серьезные нарушения, направленные против проекта, его администрации или игроков.</p>
-                    </div>
-                </div>
-                <div class="rule-item">
-                    <span class="rule-number">4.2</span>
-                    <div class="rule-content">
-                        <p>Обман или намеренный ввод администрации в заблуждение в любой форме - бан на 1 час ( без предупреждения)</p>
-                    </div>
-                </div>
+                <div class="rule-item"><span class="rule-number">4.1</span><div class="rule-content"><p>Игрок может быть занесён в чёрный список проекта (ЧСП) за особо серьёзные нарушения.</p></div></div>
+                <div class="rule-item"><span class="rule-number">4.2</span><div class="rule-content"><p>Обман или намеренный ввод администрации в заблуждение — бан на 1 час (без предупреждения)</p></div></div>
             </div>
-
             <div class="rule-category">
-                <h3>⚖️ Основания для занесения в ЧСП:</h3>
+                <h3>⚖️ Основания для занесения в ЧСП</h3>
                 <div class="punishment-info">
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>Явное неуважение / грубое оскорбление руководства и идеологии проекта</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>Оскорбления родных руководства проекта</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>Нанесение ущерба проекту и его репутации</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>Серьезный слив личной информации</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>Скам / нанесение ущерба игрокам</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">⚠️</span>
-                        <div>
-                            <strong>По решению руководства проекта</strong>
-                        </div>
-                    </div>
-                    <div class="punishment-item">
-                        <span class="punishment-icon">🔴</span>
-                        <div>
-                            <strong>Наказание: бан навсегда.</strong>
-                        </div>
-                    </div>
+                    <div class="punishment-item"><span class="punishment-icon">⚠️</span><div><strong>Явное неуважение / грубое оскорбление руководства</strong></div></div>
+                    <div class="punishment-item"><span class="punishment-icon">⚠️</span><div><strong>Нанесение ущерба проекту и его репутации</strong></div></div>
+                    <div class="punishment-item"><span class="punishment-icon">⚠️</span><div><strong>Серьёзный слив личной информации</strong></div></div>
+                    <div class="punishment-item"><span class="punishment-icon">⚠️</span><div><strong>Скам / нанесение ущерба игрокам</strong></div></div>
+                    <div class="punishment-item"><span class="punishment-icon">🔴</span><div><strong>Наказание: бан навсегда.</strong></div></div>
                 </div>
             </div>
             </div>
-
             <div class="rules-footer">
                 <p>❗ Администрация оставляет за собой право изменять правила и выносить наказания по своему усмотрению.</p>
                 <p>📧 Если у вас есть вопросы по правилам, обратитесь в <a href="support.html">поддержку</a>.</p>
@@ -202,12 +91,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Verdant Elegy. Все права защищены.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>© 2026 Verdant Elegy. Все права защищены.</p></div></footer>
     <script src="script.js"></script>
     <script src="rules.js"></script>
 </body>
